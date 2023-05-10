@@ -55,6 +55,9 @@
     <Filter Include="ソース ファイル\Player">
       <UniqueIdentifier>{3ed4cdb4-882d-47bc-a6f0-0add09237e77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MT">
+      <UniqueIdentifier>{fde94dbb-4688-4eb6-91a3-5c48590dae6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MT.cpp">
+      <Filter>ソース ファイル\MT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MT.h">
+      <Filter>ソース ファイル\MT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
