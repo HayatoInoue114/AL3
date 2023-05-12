@@ -58,6 +58,12 @@
     <Filter Include="ソース ファイル\MT">
       <UniqueIdentifier>{fde94dbb-4688-4eb6-91a3-5c48590dae6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\MT">
+      <UniqueIdentifier>{bdd65a3c-022f-45a1-8bbb-66dc2b8a5e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{04cd3704-d36a-4d4b-8a87-cccaab0f840b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,11 +173,11 @@
     <ClInclude Include="2d\ImGuiManager.h">
       <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClInclude>
     <ClInclude Include="MT.h">
-      <Filter>ソース ファイル\MT</Filter>
+      <Filter>ヘッダー ファイル\MT</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
