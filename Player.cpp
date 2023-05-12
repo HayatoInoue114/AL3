@@ -77,6 +77,16 @@ void Player::Update() {
 	worldTransform_.translation_.x = num[0];
 	worldTransform_.translation_.y = num[1];
 	worldTransform_.translation_.z = num[2];
+
+	//回転速さ[ラジアン/frame]
+	const float kRotSpeed = 0.02f;
+
+	//押した方向で移動ベクトルを変更
+	if (input_->PushKey(DIK_A)) {
+		worldTransform_.rotation_.y -= kRotSpeed;
+	} else if(input_->PushKey(DIK_D)) {
+		worldTransform_.rotation_.y += kRotSpeed;
+	}
 }
 
 void Player::Draw(ViewProjection viewProjection) {
@@ -86,3 +96,8 @@ void Player::Draw(ViewProjection viewProjection) {
 //void Player::SetWorldTransform_(WorldTransform worldTransform) { 
 //	worldTransform_ = {worldTransform}; 
 //}
+
+void Player::Attack() {
+
+}
+

@@ -64,6 +64,15 @@
     <Filter Include="ヘッダー ファイル\Player">
       <UniqueIdentifier>{04cd3704-d36a-4d4b-8a87-cccaab0f840b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\PlayerBullet">
+      <UniqueIdentifier>{542d31df-f5ec-4273-b4f4-652bcdecb9c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\PlayerBullet">
+      <UniqueIdentifier>{5f9ba213-4c8e-4f91-974e-76c815c1fb6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\3d">
+      <UniqueIdentifier>{fbf6b75e-53d2-4d2f-8b83-bc729848c25a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="MT.cpp">
       <Filter>ソース ファイル\MT</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>ソース ファイル\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldTransformEx.cpp">
+      <Filter>ソース ファイル\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>ヘッダー ファイル\PlayerBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
