@@ -1,10 +1,7 @@
 #pragma once
-#include<math.h>
-#include<assert.h>
-#include<cmath>
+#include <Vector2.h>
 #include <Vector3.h>
 #include <Matrix4x4.h>
-
 
 
 // 加算
@@ -37,4 +34,26 @@ Matrix4x4 Transpose(const Matrix4x4& m);
 // 単位行列の作成
 Matrix4x4 MakeIdentity4x4();
 
+// X軸回転行列
+Matrix4x4 MakeRotateXMatrix(float radian);
+// Y軸回転行列
+Matrix4x4 MakeRotateYMatrix(float radian);
+// Z軸回転行列
+Matrix4x4 MakeRotateZMatrix(float radian);
+
+// 3次元アフィン変換行列
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
+
 //void MatrixScreenPrintf(int x, int y, const Matrix4x4& matrix);
+
+// 1.透視投影行列
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip);
+// 2.正射影行列
+Matrix4x4 MakeOrthographicMatrix(
+    float left, float right, float top, float bottom, float nearClip, float farClip);
+// 3.ビューポート変換行列
+Matrix4x4 MakeViewportMatrix(
+    float left, float top, float width, float height, float minDepth, float maxDepth);
+
+// クロス積
+Vector3 Cross(const Vector3& v1, const Vector3& v2);
