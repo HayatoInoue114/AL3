@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "MT.h"
 #include "PlayerBullet.h"
+#include <list>
 
 
 /// <summary>
@@ -55,6 +56,6 @@ private:
 	Input* input_ = nullptr;
 	
 	//弾
-	PlayerBullet* bullet_ = nullptr;
+	std::list<PlayerBullet*> bullets_;
 };
 
