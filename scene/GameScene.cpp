@@ -37,6 +37,11 @@ void GameScene::Initialize() {
 	AxisIndicator::GetInstance()->SetVisible(true);
 	//軸方向表示が参照するビュープロジェクションを指定する(アドレス渡し)
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection);
+
+	//敵の生成
+	enemy_ = new Enemy();
+	//敵の初期化
+	enemy_->Initialize(model, textureHandle);
 }
 
 void GameScene::Update() {
