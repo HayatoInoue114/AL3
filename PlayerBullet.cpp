@@ -15,7 +15,7 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 
 	worldTransform_.Initialize();
 	//引数で受け取った初期座標をセット
-	worldTransform_.translation_ = {position};
+	worldTransform_.translation_ = position;
 }
 
 void PlayerBullet::Update() { 

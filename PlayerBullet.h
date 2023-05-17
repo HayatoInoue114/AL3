@@ -33,7 +33,7 @@ private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	// モデル
-	Model* model_ = nullptr;
+	Model* model_;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 };
