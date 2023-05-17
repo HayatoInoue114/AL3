@@ -56,4 +56,7 @@ Matrix4x4 MakeViewportMatrix(
     float left, float top, float width, float height, float minDepth, float maxDepth);
 
 // クロス積
-Vector3 Cross(const Vector3& v1, const Vector3& v2);
+Vector3 Cross(const Vector3& v1, const Vector3& v, const Matrix4x4& m);
+
+//ベクトル変換
+Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
