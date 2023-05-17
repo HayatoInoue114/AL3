@@ -3,6 +3,7 @@
 #include "WorldTransform.h"
 #include "Input.h"
 #include "MT.h"
+#include "PlayerBullet.h"
 
 
 /// <summary>
@@ -30,6 +31,16 @@ public:
 /// </summary>
 	void Draw(ViewProjection viewProjection);
 
+	/// <summary>
+	/// 更新
+	/// </summary>
+	void Attack();
+
+	/// <summary>
+	/// 旋回
+	/// </summary>
+	void Rotate();
+
 	/*WorldTransform GetWorldTransform() { return worldTransform_; }
 	void SetWorldTransform_(WorldTransform worldTransform);*/
 
@@ -43,6 +54,7 @@ private:
 	//キーボード入力
 	Input* input_ = nullptr;
 	
-	
+	//弾
+	PlayerBullet* bullet_ = nullptr;
 };
 
