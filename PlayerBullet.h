@@ -1,5 +1,5 @@
 #pragma once
-#include"Model.h"
+#include "Model.h"
 #include "Vector3.h"
 #include "WorldTransform.h"
 #include <assert.h>
