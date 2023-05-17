@@ -36,6 +36,11 @@ public:
 	/// </summary>
 	void Attack();
 
+	/// <summary>
+	/// 旋回
+	/// </summary>
+	void Rotate();
+
 	/*WorldTransform GetWorldTransform() { return worldTransform_; }
 	void SetWorldTransform_(WorldTransform worldTransform);*/
 

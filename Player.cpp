@@ -78,26 +78,49 @@ void Player::Update() {
 	worldTransform_.translation_.y = num[1];
 	worldTransform_.translation_.z = num[2];
 
-	//回転速さ[ラジアン/frame]
-	const float kRotSpeed = 0.02f;
+	//キャラクター攻撃処理
+	Attack();
 
-	//押した方向で移動ベクトルを変更
-	if (input_->PushKey(DIK_A)) {
-		worldTransform_.rotation_.y -= kRotSpeed;
-	} else if(input_->PushKey(DIK_D)) {
-		worldTransform_.rotation_.y += kRotSpeed;
+	//弾更新
+	if (bullet_) {
+		bullet_->Update();
 	}
 }
 
 void Player::Draw(ViewProjection viewProjection) {
 	model_->Draw(worldTransform_, viewProjection, textureHandle_);
+
+	//弾描画
+	if (bullet_) {
+	bullet_->Draw(viewProjection);
+	}
 }
 
 //void Player::SetWorldTransform_(WorldTransform worldTransform) { 
 //	worldTransform_ = {worldTransform}; 
 //}
 
-void Player::Attack() {
+void Player::Attack() { 
+	if (input_->PushKey(DIK_SPACE)) {
+		//弾を生成し、初期化
+		PlayerBullet* newBullet = new PlayerBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_);
 
+		//弾を登録する
+		bullet_ = newBullet;
+	}
 }
 
+
+
+void Player::Rotate() {
+	// 回転速さ[ラジアン/frame]
+	const float kRotSpeed = 0.02f;
+
+	// 押した方向で移動ベクトルを変更
+	if (input_->PushKey(DIK_A)) {
+		worldTransform_.rotation_.y -= kRotSpeed;
+	} else if (input_->PushKey(DIK_D)) {
+		worldTransform_.rotation_.y += kRotSpeed;
+	}
+}

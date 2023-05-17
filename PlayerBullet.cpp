@@ -6,16 +6,16 @@ PlayerBullet::PlayerBullet() {}
 PlayerBullet::~PlayerBullet() {}
 
 void PlayerBullet::Initialize(Model* model, const Vector3& position) {
-	//NULLƒ|ƒCƒ“ƒ^ƒ`ƒFƒbƒN
+	//NULLãƒã‚¤ãƒ³ã‚¿ãƒã‚§ãƒƒã‚¯
 	assert(model);
 
 	model_ = model;
-	//ƒeƒNƒXƒ`ƒƒ“Ç‚Ýž‚Ý
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	textureHandle_ = TextureManager::Load("godest.png");
 
 	worldTransform_.Initialize();
-	//ˆø”‚ÅŽó‚¯Žæ‚Á‚½‰ŠúÀ•W‚ðƒZƒbƒg
-	worldTransform_.translation_ = {-100,-100,0};
+	//å¼•æ•°ã§å—ã‘å–ã£ãŸåˆæœŸåº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
+	worldTransform_.translation_ = {position};
 }
 
 void PlayerBullet::Update() { 
