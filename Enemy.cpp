@@ -15,6 +15,8 @@ void Enemy::Initialize(Model* model) {
 
 void Enemy::Update() { 
 	switch (phase_) {
+	case Phase::Approach:
+		break;
 	default:
 		break;
 	}
