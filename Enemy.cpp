@@ -17,7 +17,7 @@ void Enemy::Update() {
 	// キャラクターの移動ベクトル
 	Vector3 move = {0, 0, 0};
 
-	// キャラクターの移動の速さ
+	// キャラクターの移動の速さs
 	const float kCharacterSpeed = 0.3f;
 
 	// 座標移動（ベクトルの加算）
