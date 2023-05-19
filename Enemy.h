@@ -27,6 +27,12 @@ public:
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	void Draw(const ViewProjection& viewProjection);
 
+
+	enum class Phase {
+		Approach,	//接近する
+		Leave,		//離脱する
+	};
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -34,4 +40,6 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+
+	
 };

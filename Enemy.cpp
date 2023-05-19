@@ -14,6 +14,13 @@ void Enemy::Initialize(Model* model) {
 }
 
 void Enemy::Update() { 
+	switch (phase_) {
+	default:
+		break;
+	}
+
+
+
 	// キャラクターの移動ベクトル
 	Vector3 move = {0, 0, 0};
 
