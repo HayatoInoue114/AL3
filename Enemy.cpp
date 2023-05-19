@@ -1,19 +1,33 @@
 #include "Enemy.h"
 
-void Enemy::Initialize(Model* model, const Vector3& position) {
-	// NULLƒ|ƒCƒ“ƒ^ƒ`ƒFƒbƒN
+void Enemy::Initialize(Model* model) {
+	// NULLãƒã‚¤ãƒ³ã‚¿ãƒã‚§ãƒƒã‚¯
 	assert(model);
 
 	model_ = model;
-	// ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
 	textureHandle_ = TextureManager::Load("title_jiki.png");
 
 	worldTransform_.Initialize();
-	// ˆø”‚Åó‚¯æ‚Á‚½‰ŠúÀ•W‚ğƒZƒbƒg
-	worldTransform_.translation_ = {position};
+	// å¼•æ•°ã§å—ã‘å–ã£ãŸåˆæœŸåº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
+	worldTransform_.translation_ = {};
 }
 
 void Enemy::Update() { 
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«
+	Vector3 move = {0, 0, 0};
+
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ç§»å‹•ã®é€Ÿã•
+	const float kCharacterSpeed = 0.3f;
+
+	// åº§æ¨™ç§»å‹•ï¼ˆãƒ™ã‚¯ãƒˆãƒ«ã®åŠ ç®—ï¼‰
+	move.z -= kCharacterSpeed;
+	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
+
+	worldTransform_.matWorld_ = MakeAffineMatrix(
+	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
+
+
 	worldTransform_.UpdateMatrix(); 
 }
 

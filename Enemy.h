@@ -2,36 +2,36 @@
 #include "Model.h"
 #include "Vector3.h"
 #include "WorldTransform.h"
+#include "MT.h"
 #include <assert.h>
 
 /// <summary>
-/// “G
+/// æ•µ
 /// </summary>
 class Enemy {
 public:
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="model">ƒ‚ƒfƒ‹</param>
-	/// <param name="position">‰ŠúÀ•W</param>
-	void Initialize(Model* model, const Vector3& position);
+	/// <param name="model">ãƒ¢ãƒ‡ãƒ«</param>
+	void Initialize(Model* model);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
-	/// <param name="viewProjection">ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“</param>
+	/// <param name="viewProjection">ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³</param>
 	void Draw(const ViewProjection& viewProjection);
 
 private:
-	// ƒ[ƒ‹ƒh•ÏŠ·ƒf[ƒ^
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ãƒ‡ãƒ¼ã‚¿
 	WorldTransform worldTransform_;
-	// ƒ‚ƒfƒ‹
+	// ãƒ¢ãƒ‡ãƒ«
 	Model* model_ = nullptr;
-	// ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«
 	uint32_t textureHandle_ = 0u;
 };

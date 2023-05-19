@@ -9,6 +9,7 @@ GameScene::~GameScene() {
 	delete model;
 	delete player_;
 	delete debugCamera_;
+	delete enemy_;
 }
 
 void GameScene::Initialize() {
@@ -41,12 +42,15 @@ void GameScene::Initialize() {
 	//敵の生成
 	enemy_ = new Enemy();
 	//敵の初期化
-	enemy_->Initialize(model, textureHandle);
+	enemy_->Initialize(model);
 }
 
 void GameScene::Update() {
 	//自キャラの更新
 	player_->Update();
+
+	//敵の更新
+	enemy_->Update();
 
 	//デバッグカメラの更新
 	debugCamera_->Update();
@@ -102,7 +106,7 @@ void GameScene::Draw() {
 	/// </summary>
 	player_->Draw(viewProjection);
 
-
+	enemy_->Draw(viewProjection);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion
