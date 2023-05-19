@@ -33,6 +33,9 @@ public:
 		Leave,		//離脱する
 	};
 
+	void Approach();
+	void Leave();
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -42,5 +45,11 @@ private:
 	uint32_t textureHandle_ = 0u;
 
 	//フェーズ
-	Phase phase_;
+	Phase phase_ = Phase::Approach;
+
+	// キャラクターの移動ベクトル
+	Vector3 move = {0, 0, 0};
+
+	// キャラクターの移動の速さ
+	const float kCharacterSpeed = 0.2f;
 };

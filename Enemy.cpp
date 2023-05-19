@@ -10,14 +10,37 @@ void Enemy::Initialize(Model* model) {
 
 	worldTransform_.Initialize();
 	// 引数で受け取った初期座標をセット
-	worldTransform_.translation_ = {};
+	worldTransform_.translation_ = {0,5.0f,5.0f};
+}
+
+void Enemy::Approach() {
+	move = {0, 0, -kCharacterSpeed};
+	// 移動
+	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
+
+	// 既定の位置に到達したら離脱
+	if (worldTransform_.translation_.z < -10.0f) {
+		phase_ = Phase::Leave;
+	}
+}
+
+void Enemy::Leave() {
+	move = {kCharacterSpeed, kCharacterSpeed, 0};
+	// 移動
+	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
 }
 
 void Enemy::Update() { 
+
+	
+
 	switch (phase_) {
 	case Phase::Approach:
+		Approach();
+		break;
 
-
+		case Phase::Leave:
+		Leave();
 		break;
 	default:
 		break;
@@ -25,15 +48,8 @@ void Enemy::Update() {
 
 
 
-	// キャラクターの移動ベクトル
-	Vector3 move = {0, 0, 0};
-
-	// キャラクターの移動の速さs
-	const float kCharacterSpeed = 0.3f;
-
-	// 座標移動（ベクトルの加算）
-	move.z -= kCharacterSpeed;
-	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
+	
+	
 
 	worldTransform_.matWorld_ = MakeAffineMatrix(
 	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
