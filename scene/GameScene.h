@@ -74,4 +74,5 @@ private: // メンバ変数
 	//敵
 	Enemy* enemy_ = nullptr;
 
+	
 };

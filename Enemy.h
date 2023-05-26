@@ -5,11 +5,32 @@
 #include "MT.h"
 #include <assert.h>
 
+class Enemy;
+
+class BaseEnemyState {
+public:
+	virtual void Update(Enemy* pEnemy) = 0;
+};
+
+// 近づく
+class EnemyStateApproach : public BaseEnemyState {
+	void Update(Enemy* pEnemy) override;
+};
+
+// 逃げてく
+class EnemyStateLeave : public BaseEnemyState {
+	void Update(Enemy* pEnemy) override;
+};
+
+
+
 /// <summary>
 /// 敵
 /// </summary>
 class Enemy {
 public:
+	Enemy();
+	~Enemy();
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -35,9 +56,10 @@ public:
 
 	void Approach();
 	void Leave();
-	void Situation();
+	void ChangeState(BaseEnemyState* newState);
 
-	
+	void ChangePosition(Vector3 vector);
+	Vector3 GetTranslation() { return worldTransform_.translation_; }
 
 private:
 	// ワールド変換データ
@@ -59,5 +81,8 @@ private:
 	//メンバ関数ポインタ
 	static void (Enemy::*situation[])();
 	
-	
+	BaseEnemyState* state_;
+
+	/*EnemyStateApproach* approach_;
+	EnemyStateLeave* leave_;*/
 };
