@@ -1,5 +1,10 @@
 #include "Enemy.h"
 
+void (Enemy::*Enemy::situation[])() = {
+	&Enemy::Approach,
+	&Enemy::Leave
+};
+
 void Enemy::Initialize(Model* model) {
 	// NULLポインタチェック
 	assert(model);
@@ -30,26 +35,23 @@ void Enemy::Leave() {
 	worldTransform_.translation_ = Add(worldTransform_.translation_, move);
 }
 
-void Enemy::Update() { 
-
-	
-
+void Enemy::Situation() {
 	switch (phase_) {
 	case Phase::Approach:
 		Approach();
 		break;
 
-		case Phase::Leave:
+	case Phase::Leave:
 		Leave();
 		break;
 	default:
 		break;
 	}
+}
 
+void Enemy::Update() { 
 
-
-	
-	
+	(this->*situation[static_cast<size_t>(phase_)])();
 
 	worldTransform_.matWorld_ = MakeAffineMatrix(
 	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);

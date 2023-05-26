@@ -35,6 +35,9 @@ public:
 
 	void Approach();
 	void Leave();
+	void Situation();
+
+	
 
 private:
 	// ワールド変換データ
@@ -52,4 +55,9 @@ private:
 
 	// キャラクターの移動の速さ
 	const float kCharacterSpeed = 0.2f;
+
+	//メンバ関数ポインタ
+	static void (Enemy::*situation[])();
+	
+	
 };
