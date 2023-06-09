@@ -4,6 +4,7 @@
 #include "WorldTransform.h"
 #include "MT.h"
 #include <assert.h>
+#include "EnemyBullet.h"
 
 class Enemy;
 
@@ -48,6 +49,11 @@ public:
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	void Draw(const ViewProjection& viewProjection);
 
+	/// <summary>
+	/// 弾発射
+	/// </summary>
+	void Fire();
+
 
 	enum class Phase {
 		Approach,	//接近する
@@ -82,6 +88,12 @@ private:
 	static void (Enemy::*situation[])();
 	
 	BaseEnemyState* state_;
+
+	//弾を発射する間隔
+	int bulletFireCount;
+
+	// 弾
+	std::list<EnemyBullet*> bullets_;
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/

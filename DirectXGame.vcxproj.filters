@@ -79,6 +79,12 @@
     <Filter Include="ヘッダー ファイル\Enemy">
       <UniqueIdentifier>{8b9a3c08-3df9-4820-abe0-81f4a71c4b0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\EnemyBullet">
+      <UniqueIdentifier>{635d2216-e661-45dc-a010-ce9f2e7406be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\EnemyBullet">
+      <UniqueIdentifier>{865ce93a-f590-492e-9db5-e5f7a7900bfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>ソース ファイル\EnemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>ヘッダー ファイル\EnemyBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
