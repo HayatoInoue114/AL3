@@ -54,6 +54,10 @@ public:
 	/// </summary>
 	void Fire();
 
+	/// <summary>
+	/// 接近フェーズ初期化
+	/// </summary>
+	void InitializeApproachPhase();
 
 	enum class Phase {
 		Approach,	//接近する
@@ -90,7 +94,10 @@ private:
 	BaseEnemyState* state_;
 
 	//弾を発射する間隔
-	int bulletFireCount;
+	static const int kFireInterval = 30;
+
+	//発射タイマー
+	int32_t fireCount = 0;
 
 	// 弾
 	std::list<EnemyBullet*> bullets_;
