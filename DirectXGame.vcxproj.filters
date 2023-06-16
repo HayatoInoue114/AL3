@@ -85,6 +85,12 @@
     <Filter Include="ヘッダー ファイル\EnemyBullet">
       <UniqueIdentifier>{865ce93a-f590-492e-9db5-e5f7a7900bfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\TimedCall">
+      <UniqueIdentifier>{6dea452d-fe6b-48c4-837c-541b44e4479e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\TimedCall">
+      <UniqueIdentifier>{8c79c0ba-868a-4a36-a4b5-eb745e14959a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -119,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>ソース ファイル\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedCall.cpp">
+      <Filter>ソース ファイル\TimedCall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +230,12 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>ヘッダー ファイル\EnemyBullet</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedCall.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -270,5 +285,10 @@
     <None Include="Resources\shaders\Terrain.hlsli">
       <Filter>シェーダー ファイル</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AL3.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
 #include "MT.h"
 #include <assert.h>
 #include "EnemyBullet.h"
+#include "TimedCall.h"
+
 
 class Enemy;
 
@@ -54,10 +56,15 @@ public:
 	/// </summary>
 	void Fire();
 
-	/// <summary>
+	/*/// <summary>
 	/// 接近フェーズ初期化
 	/// </summary>
-	void InitializeApproachPhase();
+	void InitializeApproachPhase();*/
+
+	/// <summary>
+	/// 弾を発射し、タイマーをリセットするコールバック関数
+	/// </summary>
+	void FireAndResetCallback();
 
 	enum class Phase {
 		Approach,	//接近する
@@ -101,6 +108,9 @@ private:
 
 	// 弾
 	std::list<EnemyBullet*> bullets_;
+
+	//次元発動のリスト
+	std::list<TimedCall*> timedCalls_;
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/

@@ -52,8 +52,6 @@ void Enemy::Update() {
 
 	worldTransform_.UpdateMatrix(); 
 
-	Fire();
-
 	for (EnemyBullet* bullet : bullets_) {
 		bullet->Update();
 	}
@@ -90,6 +88,17 @@ void Enemy::Fire() {
 		// 弾を登録する
 		bullets_.push_back(newBullet);
 	}
+}
+
+void Enemy::FireAndResetCallback() {
+	Fire(); 
+
+	//発射タイマーをセットする
+	std::function<void(void)> callback = std::bind(&Enemy::FireAndResetCallback, this);
+
+	TimedCall* timedCall = new TimedCall(callback, kFireInterval);
+
+	timedCalls_.push_back(timedCall);
 }
 
 
