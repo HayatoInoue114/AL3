@@ -7,7 +7,7 @@
 /// </summary>
 class TimedCall {
 public:
-	TimedCall(std::function <int(int)> f, uint32_t time);
+	TimedCall(std::function <void(void)> f, uint32_t time);
 	~TimedCall();
 
 	//更新
@@ -18,7 +18,7 @@ public:
 
 private:
 	//コールバック
-	std::function<int(int)> f_;
+	std::function<void(void)> f_;
 
 	//残り時間
 	uint32_t time_;

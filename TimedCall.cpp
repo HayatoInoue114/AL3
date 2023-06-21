@@ -1,7 +1,7 @@
 #include "TimedCall.h"
 
 
-TimedCall::TimedCall(std::function<int(int)> f, uint32_t time) {
+TimedCall::TimedCall(std::function<void(void)> f, uint32_t time) {
 	f_ = f; 
 	time_ = time;
 }

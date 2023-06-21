@@ -10,6 +10,9 @@ Enemy::Enemy() {
 }
 
 Enemy::~Enemy() { 
+	for (TimedCall* timedCall : timedCalls_) {
+		delete timedCall;
+	}
 }
 
 void Enemy::Initialize(Model* model) {
@@ -55,6 +58,15 @@ void Enemy::Update() {
 	for (EnemyBullet* bullet : bullets_) {
 		bullet->Update();
 	}
+
+	//終了したタイマーを削除
+	FireAndResetCallback();
+
+	//範囲for文でリストの全要素について回す
+	for (TimedCall* timedCall : timedCalls_) {
+		timedCall->Update();
+	}
+
 }
 
 void Enemy::Draw(const ViewProjection& viewProjection) { 

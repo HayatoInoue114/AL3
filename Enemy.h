@@ -101,7 +101,7 @@ private:
 	BaseEnemyState* state_;
 
 	//弾を発射する間隔
-	static const int kFireInterval = 30;
+	static const uint32_t kFireInterval = 30;
 
 	//発射タイマー
 	int32_t fireCount = 0;
