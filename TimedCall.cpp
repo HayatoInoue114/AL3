@@ -16,6 +16,6 @@ void TimedCall::Update() {
 	if (time_ <= 0) {
 		isComplete = true;
 		//コールバック関数呼び出し
-		std::function<int(int)> f_();
+		std::function<void(void)> f_();
 	}
 }
