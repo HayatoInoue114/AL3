@@ -40,6 +40,8 @@ private:
 	// 速度
 	Vector3 velocity_ = {};
 
+	float velocityXZ_ = 0;
+
 	// 寿命<frm>
 	static const int32_t kLifeTime = 60 * 5;
 

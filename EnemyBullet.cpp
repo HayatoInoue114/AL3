@@ -12,12 +12,25 @@ void EnemyBullet::Initialize(Model* model, const Vector3& position, const Vector
 	// テクスチャ読み込み
 	textureHandle_ = TextureManager::Load("ball.png");
 
+	
+
+
+	// Z方向に伸びた形状
+	worldTransform_.scale_ = {0.5f, 0.5f, 3.0f};
+
 	worldTransform_.Initialize();
 	// 引数で受け取った初期座標をセット
 	worldTransform_.translation_ = {position};
 
 	// 引数で受け取った速度をメンバ変数に代入
 	velocity_ = velocity;
+
+	// Y軸周り角度(0y)
+	worldTransform_.rotation_.y = std::atan2(velocity_.x, velocity_.z);
+
+	velocityXZ_ = std::sqrt(velocity_.x * velocity_.x + velocity_.z * velocity_.z);
+	// X軸周り角度(0x)
+	worldTransform_.rotation_.x = std::atan2(-velocity_.y, velocityXZ_);
 }
 
 void EnemyBullet::Update() {

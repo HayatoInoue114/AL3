@@ -146,7 +146,7 @@ void EnemyStateApproach::Update(Enemy* pEnemy) {
 	enemy_ = pEnemy;
 	Vector3 position = enemy_->GetWorldPosition();
 
-	Vector3 move = {0, 0, -0.1f};
+	Vector3 move = {0.01f, 0, -0.015f};
 	
 	// 終了したタイマーを削除
 	timedCalls_.remove_if([](TimedCall* timedCall) {
@@ -164,7 +164,7 @@ void EnemyStateApproach::Update(Enemy* pEnemy) {
 
 	enemy_->ChangePosition(move);
 	// 既定の位置に到達したら離脱
-	if (position.z < -10.0f) {
+	if (position.z < -20.0f) {
 		enemy_->ChangeState(new EnemyStateLeave());
 	}
 
