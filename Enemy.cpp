@@ -94,7 +94,7 @@ void Enemy::Fire() {
 	assert(player_);
 
 	// 弾の速度
-	const float kBulletSpeed = -1.0f;
+	const float kBulletSpeed = 1.0f;
 	velocity_ = {1, 1, kBulletSpeed};
 
 	//差分ベクトルを求める
