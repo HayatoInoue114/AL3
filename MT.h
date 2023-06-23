@@ -17,6 +17,11 @@ float Length(const Vector3& v);
 // 正規化
 Vector3 Normalize(const Vector3& v);
 
+float Dot(float num1, float num2);
+
+Vector3 Multiply(const Vector3& v1, const Vector3& v2);
+Vector3 Division(const Vector3& v1, const Vector3& v2);
+
 static const int kColumnWidth = 60;
 //void VectorScreenPrintf(int x, int y, const Vector3& vector, const char* label);
 
@@ -60,3 +65,9 @@ Vector3 Cross(const Vector3& v1, const Vector3& v2);
 
 //ベクトル変換
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
+
+//線形補間
+Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t);
+
+//球面線形補間
+Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t);

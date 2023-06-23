@@ -8,18 +8,16 @@ void (Enemy::*Enemy::situation[])() = {
 
 Enemy::Enemy() { 
 	state_ = new EnemyStateApproach();
-	/*player_ = new Player();*/
-	deltaVector_ = {};
 	velocity_ = {};
+	v1 = {0, 0, 0};
+	v2 = {10, 10, 10};
+	t = 0;
 }
 
 Enemy::~Enemy() { 
-	/*delete state_;
-	delete player_;*/
 	for (EnemyBullet* enemyBullet : bullets_) {
 		delete enemyBullet;
 	}
-	
 }
 
 void Enemy::Initialize(Model* model, Vector3 position) {

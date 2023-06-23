@@ -28,7 +28,7 @@ void EnemyBullet::Initialize(Model* model, const Vector3& position, const Vector
 	// Y軸周り角度(0y)
 	worldTransform_.rotation_.y = std::atan2(velocity_.x, velocity_.z);
 
-	velocityXZ_ = std::sqrt(velocity_.x * velocity_.x + velocity_.z * velocity_.z);
+	velocityXZ_ = Dot(velocity_.x,velocity_.z);
 	// X軸周り角度(0x)
 	worldTransform_.rotation_.x = std::atan2(-velocity_.y, velocityXZ_);
 }

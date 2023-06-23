@@ -139,7 +139,8 @@ private:
 
 	Vector3 velocity_;
 
-	Vector3 deltaVector_;
+	Vector3 v1, v2;
+	float t;
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/

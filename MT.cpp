@@ -21,8 +21,14 @@ Vector3 Multiply(float scalar, const Vector3& v) {
 	return num;
 }
 
+float Dot(float num1, float num2) {
+	float result = std::sqrt(num1 * num1 + num2 * num2);
+	return result;
+}
+
+
 float Dot(const Vector3& v1, const Vector3& v2) {
-	float num = {v1.x * v2.x + v1.y * v2.y + v1.z * v2.z};
+	float num = std::sqrt({v1.x * v2.x + v1.y * v2.y + v1.z * v2.z});
 	return num;
 }
 
@@ -361,5 +367,48 @@ Vector3 TransformNormal(const Vector3& v,const Matrix4x4& m) {
 	    v.x * m.m[0][0] + v.y * m.m[1][0] + v.z * m.m[2][0],
 	    v.x * m.m[0][1] + v.y * m.m[1][1] + v.z * m.m[2][1],
 	    v.x * m.m[0][2] + v.y * m.m[1][2] + v.z * m.m[2][2]};
+	return result;
+}
+
+Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t) { 
+	Vector3 num = {};
+	num.x = (1 - t) * v1.x + t * v2.x;
+	num.y = (1 - t) * v1.y + t * v2.y;
+	num.z = (1 - t) * v1.z + t * v2.z;
+
+	return num;
+}
+
+Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t) {
+	Vector3 result = {};
+	Vector3 angle = {
+	    std::acos(v1.x * v1.x + v2.x * v2.x),
+	    std::acos(v1.y * v1.y + v2.y * v2.y),
+	    std::acos(v1.z * v1.z + v2.z * v2.z)
+	};
+
+	angle = {std::sin(angle.x), std::sin(angle.y), std::sin(angle.z)};
+
+	Vector3 startPosition = {sin(angle.x * (1 - t)), sin(angle.y * (1 - t)), sin(angle.z * (1 - t))};
+
+	Vector3 endPosition = {sin(angle.x * t), sin(angle.y * t), sin(angle.z * t)};
+
+	result = Add(Multiply(startPosition, v1), Multiply(endPosition,v2));
+
+	result = Division(result, angle);
+
+	result = Normalize(result);
+
+
+	return result;
+}
+
+Vector3 Multiply(const Vector3& v1, const Vector3& v2) {
+	Vector3 result = {v1.x * v2.x, v1.y * v2.y, v1.z * v2.z};
+	return result;
+}
+
+Vector3 Division(const Vector3& v1, const Vector3& v2) {
+	Vector3 result = {v1.x / v2.x, v1.y / v2.y, v1.z / v2.z};
 	return result;
 }
