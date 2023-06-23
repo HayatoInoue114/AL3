@@ -15,7 +15,7 @@ void TimedCall::Update() {
 	time_--;
 	if (time_ <= 0) {
 		isComplete = true;
-		//ƒR[ƒ‹ƒoƒbƒNŠÖ”ŒÄ‚Ño‚µ
-		std::function<void(void)> f_();
+		//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°å‘¼ã³å‡ºã—
+		f_();
 	}
 }

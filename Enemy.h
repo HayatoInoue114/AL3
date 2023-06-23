@@ -1,31 +1,47 @@
 #pragma once
+#include "EnemyBullet.h"
+#include "MT.h"
 #include "Model.h"
+#include "TimedCall.h"
 #include "Vector3.h"
 #include "WorldTransform.h"
-#include "MT.h"
 #include <assert.h>
-#include "EnemyBullet.h"
-#include "TimedCall.h"
-
 
 class Enemy;
+class Player;
 
 class BaseEnemyState {
 public:
+	virtual void Initialize(Enemy* enemy) = 0;
 	virtual void Update(Enemy* pEnemy) = 0;
 };
 
 // 近づく
 class EnemyStateApproach : public BaseEnemyState {
+	~EnemyStateApproach();
+	void Initialize(Enemy* enemy) override;
 	void Update(Enemy* pEnemy) override;
+	/// <summary>
+	/// 弾を発射し、タイマーをリセットするコールバック関数
+	/// </summary>
+	void FireAndResetCallback();
+
+private:
+	Enemy* enemy_;
+	// 弾を発射する間隔
+	static const uint32_t kFireInterval = 30;
+	// 次元発動のリスト
+	std::list<TimedCall*> timedCalls_;
 };
 
 // 逃げてく
 class EnemyStateLeave : public BaseEnemyState {
+	void Initialize(Enemy* enemy) override;
 	void Update(Enemy* pEnemy) override;
+
+private:
+	Enemy* enemy_;
 };
-
-
 
 /// <summary>
 /// 敵
@@ -38,7 +54,7 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="model">モデル</param>
-	void Initialize(Model* model);
+	void Initialize(Model* model, Vector3 position);
 
 	/// <summary>
 	/// 更新
@@ -61,14 +77,21 @@ public:
 	/// </summary>
 	void InitializeApproachPhase();*/
 
-	/// <summary>
+	/*/// <summary>
 	/// 弾を発射し、タイマーをリセットするコールバック関数
 	/// </summary>
-	void FireAndResetCallback();
+	void FireAndResetCallback();*/
+
+	/// <summary>
+	/// ワールド座標を取得
+	/// </summary>
+	Vector3 GetWorldPosition();
+
+	void SetPlayer(Player* player) { player_ = player; }
 
 	enum class Phase {
-		Approach,	//接近する
-		Leave,		//離脱する
+		Approach, // 接近する
+		Leave,    // 離脱する
 	};
 
 	void Approach();
@@ -86,7 +109,7 @@ private:
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 
-	//フェーズ
+	// フェーズ
 	Phase phase_ = Phase::Approach;
 
 	// キャラクターの移動ベクトル
@@ -95,22 +118,28 @@ private:
 	// キャラクターの移動の速さ
 	const float kCharacterSpeed = 0.2f;
 
-	//メンバ関数ポインタ
+	// メンバ関数ポインタ
 	static void (Enemy::*situation[])();
-	
+
 	BaseEnemyState* state_;
 
-	//弾を発射する間隔
-	static const uint32_t kFireInterval = 30;
+	//// 弾を発射する間隔
+	//static const uint32_t kFireInterval = 30;
 
-	//発射タイマー
+	// 発射タイマー
 	int32_t fireCount = 0;
 
 	// 弾
 	std::list<EnemyBullet*> bullets_;
 
-	//次元発動のリスト
-	std::list<TimedCall*> timedCalls_;
+	//// 次元発動のリスト
+	//std::list<TimedCall*> timedCalls_;
+
+	Player* player_ = nullptr;
+
+	Vector3 velocity_;
+
+	Vector3 deltaVector_;
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/

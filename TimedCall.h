@@ -3,27 +3,27 @@
 #include <functional>
 
 /// <summary>
-/// ŒÀ”­“®
+/// æ™‚é™ç™ºå‹•
 /// </summary>
 class TimedCall {
 public:
 	TimedCall(std::function <void(void)> f, uint32_t time);
 	~TimedCall();
 
-	//XV
+	//æ›´æ–°
 	void Update();
 
-	//Š®—¹‚È‚çtrue‚ğ•Ô‚·
+	//å®Œäº†ãªã‚‰trueã‚’è¿”ã™
 	bool IsFinished() { return isComplete; }
 
 private:
-	//ƒR[ƒ‹ƒoƒbƒN
+	//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	std::function<void(void)> f_;
 
-	//c‚èŠÔ
+	//æ®‹ã‚Šæ™‚é–“
 	uint32_t time_;
 
-	//Š®—¹ƒtƒ‰ƒO
-	bool isComplete;
+	//å®Œäº†ãƒ•ãƒ©ã‚°
+	bool isComplete = false;
 };
 

@@ -234,7 +234,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="TimedCall.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\TimedCall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

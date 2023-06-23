@@ -41,8 +41,11 @@ void GameScene::Initialize() {
 
 	//敵の生成
 	enemy_ = new Enemy();
+	// 敵キャラに自キャラのアドレスを渡す
+	enemy_->SetPlayer(player_);
 	//敵の初期化
-	enemy_->Initialize(model);
+	enemy_->Initialize(model, {0.5f,0.0f,-0.5f});
+	
 }
 
 void GameScene::Update() {

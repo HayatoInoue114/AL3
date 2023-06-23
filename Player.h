@@ -42,6 +42,11 @@ public:
 	/// </summary>
 	void Rotate();
 
+	/// <summary>
+	/// ワールド座標を取得
+	/// </summary>
+	Vector3 GetWorldPosition();
+
 	/*WorldTransform GetWorldTransform() { return worldTransform_; }
 	void SetWorldTransform_(WorldTransform worldTransform);*/
 
@@ -57,5 +62,7 @@ private:
 	
 	//弾
 	std::list<PlayerBullet*> bullets_;
+
+	
 };
 

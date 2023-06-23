@@ -265,22 +265,11 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 	Matrix4x4 rotateMatrix = Multiply(rotateXMatrix, Multiply(rotateYMatrix, rotateZMatrix));
 
 	Matrix4x4 mat = {
-	    scale.x * rotateMatrix.m[0][0],
-	    scale.x * rotateMatrix.m[0][1],
-	    scale.x * rotateMatrix.m[0][2],
-	    0,
-	    scale.y * rotateMatrix.m[1][0],
-	    scale.y * rotateMatrix.m[1][1],
-	    scale.y * rotateMatrix.m[1][2],
-	    0,
-	    scale.z * rotateMatrix.m[2][0],
-	    scale.z * rotateMatrix.m[2][1],
-	    scale.z * rotateMatrix.m[2][2],
-	    0,
-	    translate.x,
-	    translate.y,
-	    translate.z,
-	    1};
+	    scale.x * rotateMatrix.m[0][0],scale.x * rotateMatrix.m[0][1],scale.x * rotateMatrix.m[0][2],0,
+	    scale.y * rotateMatrix.m[1][0],scale.y * rotateMatrix.m[1][1],scale.y * rotateMatrix.m[1][2],0,
+	    scale.z * rotateMatrix.m[2][0],scale.z * rotateMatrix.m[2][1],scale.z * rotateMatrix.m[2][2],0,
+	    translate.x,translate.y,translate.z,1
+	};
 	return mat;
 }
 
