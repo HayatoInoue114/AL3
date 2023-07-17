@@ -55,6 +55,9 @@ void GameScene::Update() {
 	//敵の更新
 	enemy_->Update();
 
+	//当たり判定
+	CheckAllCollisions();
+
 	//デバッグカメラの更新
 	debugCamera_->Update();
 #ifdef _DEBUG
@@ -126,4 +129,36 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+
+void GameScene::CheckAllCollisions() { 
+	Vector3 posA, posB;
+
+	//自弾リストの取得
+	const std::list<PlayerBullet*>& playerBullets = player_->GetBullets();
+	//敵弾リストの取得
+	const std::list<EnemyBullet*>& enemyBullets = enemy_->GetBullets();
+
+	#pragma region 
+	posA = player_->GetWorldPosition();
+
+	for (EnemyBullet* bullet : enemyBullets) {
+		posB = bullet->GetWorldPosition();
+
+		Vector3 AtoB = Subtract(posA, posB);
+		float dot = (AtoB.x * AtoB.x) + (AtoB.y * AtoB.y) + (AtoB.z * AtoB.z);
+
+		if (dot <= 5) {
+			player_->OnCollision();
+			bullet->OnCollision();
+		}
+	}
+
+	#pragma endregion
+
+	#pragma region
+	#pragma endregion
+
+	#pragma region
+	#pragma endregion
 }
