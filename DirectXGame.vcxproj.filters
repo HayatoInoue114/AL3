@@ -52,44 +52,68 @@
     <Filter Include="ソース ファイル\2d">
       <UniqueIdentifier>{814a0f6d-f847-4c45-856d-4688fa4c9e6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Player">
-      <UniqueIdentifier>{3ed4cdb4-882d-47bc-a6f0-0add09237e77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\MT">
       <UniqueIdentifier>{fde94dbb-4688-4eb6-91a3-5c48590dae6e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\MT">
       <UniqueIdentifier>{bdd65a3c-022f-45a1-8bbb-66dc2b8a5e15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Player">
-      <UniqueIdentifier>{04cd3704-d36a-4d4b-8a87-cccaab0f840b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\PlayerBullet">
-      <UniqueIdentifier>{542d31df-f5ec-4273-b4f4-652bcdecb9c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\PlayerBullet">
-      <UniqueIdentifier>{5f9ba213-4c8e-4f91-974e-76c815c1fb6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\3d">
       <UniqueIdentifier>{fbf6b75e-53d2-4d2f-8b83-bc729848c25a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Enemy">
-      <UniqueIdentifier>{2a35f258-71bb-440a-859d-bf7d3c114de5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Enemy">
-      <UniqueIdentifier>{8b9a3c08-3df9-4820-abe0-81f4a71c4b0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\EnemyBullet">
-      <UniqueIdentifier>{635d2216-e661-45dc-a010-ce9f2e7406be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\EnemyBullet">
-      <UniqueIdentifier>{865ce93a-f590-492e-9db5-e5f7a7900bfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\TimedCall">
       <UniqueIdentifier>{6dea452d-fe6b-48c4-837c-541b44e4479e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\TimedCall">
       <UniqueIdentifier>{8c79c0ba-868a-4a36-a4b5-eb745e14959a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{96f2cc6e-20e3-4a3a-a048-fab1859db1bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{bf4f5d10-b8d5-4d2d-bdd9-0c59c0e81e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Character">
+      <UniqueIdentifier>{385fc8e4-78e3-4315-8d48-19a9423252bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Character\Player">
+      <UniqueIdentifier>{3ed4cdb4-882d-47bc-a6f0-0add09237e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Bullet">
+      <UniqueIdentifier>{00c198ab-e6d3-41a0-a662-93c565013433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Bullet\PlayerBullet">
+      <UniqueIdentifier>{5f9ba213-4c8e-4f91-974e-76c815c1fb6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Character\Enemy">
+      <UniqueIdentifier>{2a35f258-71bb-440a-859d-bf7d3c114de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Bullet\EnemyBullet">
+      <UniqueIdentifier>{635d2216-e661-45dc-a010-ce9f2e7406be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\Character\Enemy\EnemyState">
+      <UniqueIdentifier>{1a63538b-d622-4161-b3e8-b1b2a550b44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Character">
+      <UniqueIdentifier>{775d29d7-3dc8-4a7d-897d-65deef6130b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Character\Player">
+      <UniqueIdentifier>{04cd3704-d36a-4d4b-8a87-cccaab0f840b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Character\Enemy">
+      <UniqueIdentifier>{8b9a3c08-3df9-4820-abe0-81f4a71c4b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Character\Enemy\EnemyState">
+      <UniqueIdentifier>{a25d85d4-dd93-4cce-b7b4-166ee4c96301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Bullet">
+      <UniqueIdentifier>{a9ed6dc8-4c75-4b76-9619-d4521d95d96b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Bullet\EnemyBullet">
+      <UniqueIdentifier>{865ce93a-f590-492e-9db5-e5f7a7900bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Bullet\PlayerBullet">
+      <UniqueIdentifier>{542d31df-f5ec-4273-b4f4-652bcdecb9c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,25 +133,28 @@
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Object\Character\Player</Filter>
     </ClCompile>
     <ClCompile Include="MT.cpp">
       <Filter>ソース ファイル\MT</Filter>
     </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
-      <Filter>ソース ファイル\PlayerBullet</Filter>
+      <Filter>ソース ファイル\Object\Bullet\PlayerBullet</Filter>
     </ClCompile>
     <ClCompile Include="WorldTransformEx.cpp">
       <Filter>ソース ファイル\3d</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+      <Filter>ソース ファイル\Object\Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
-      <Filter>ソース ファイル\EnemyBullet</Filter>
+      <Filter>ソース ファイル\Object\Bullet\EnemyBullet</Filter>
     </ClCompile>
     <ClCompile Include="TimedCall.cpp">
       <Filter>ソース ファイル\TimedCall</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>ソース ファイル\Object\Character\Enemy\EnemyState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,22 +246,25 @@
       <Filter>ヘッダー ファイル\MT</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Object\Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
-      <Filter>ヘッダー ファイル\PlayerBullet</Filter>
+      <Filter>ヘッダー ファイル\Object\Bullet\PlayerBullet</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Object\Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBullet.h">
-      <Filter>ヘッダー ファイル\EnemyBullet</Filter>
+      <Filter>ヘッダー ファイル\Object\Bullet\EnemyBullet</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="TimedCall.h">
       <Filter>ヘッダー ファイル\TimedCall</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>ヘッダー ファイル\Object\Character\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
