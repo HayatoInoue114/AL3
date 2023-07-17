@@ -127,6 +127,12 @@
     <Filter Include="ヘッダー ファイル\Object\BackGround\Skydome">
       <UniqueIdentifier>{535b87f2-2e9e-456e-90b1-ad4e88c321be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\RailCamera">
+      <UniqueIdentifier>{60a6d3d2-e676-42c5-9880-8e5c8cd95533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\RailCamera">
+      <UniqueIdentifier>{51c33961-ec7a-4276-9bf3-1b48911fd1e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -170,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="Skydome.cpp">
       <Filter>ソース ファイル\Object\BackGround\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="RailCamera.cpp">
+      <Filter>ソース ファイル\Object\RailCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="Skydome.h">
       <Filter>ヘッダー ファイル\Object\BackGround\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="RailCamera.h">
+      <Filter>ヘッダー ファイル\Object\RailCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
