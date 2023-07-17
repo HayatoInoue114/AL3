@@ -154,6 +154,22 @@ void GameScene::CheckAllCollisions() {
 		}
 	}
 
+	Vector3 enemyPosition, playerBulletPosition;
+
+	enemyPosition = enemy_->GetWorldPosition();
+
+	for (PlayerBullet* bullet : playerBullets) {
+		playerBulletPosition = bullet->GetWorldPosition();
+
+		Vector3 AtoB = Subtract(enemyPosition, playerBulletPosition);
+		float dot = (AtoB.x * AtoB.x) + (AtoB.y * AtoB.y) + (AtoB.z * AtoB.z);
+
+		if (dot <= 5) {
+			player_->OnCollision();
+			bullet->OnCollision();
+		}
+	}
+
 	#pragma endregion
 
 	#pragma region
