@@ -12,6 +12,7 @@ GameScene::~GameScene() {
 	delete enemy_;
 	delete skydome_;
 	delete modelSkydome_;
+	delete railCamera_;
 }
 
 void GameScene::Initialize() {
@@ -24,6 +25,9 @@ void GameScene::Initialize() {
 	textureHandle = TextureManager::Load("godest.png");
 	// 3Dモデルの生成
 	model = Model::Create();
+
+	worldTransform_.Initialize();
+
 	// 3Dモデルの生成
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
@@ -51,11 +55,15 @@ void GameScene::Initialize() {
 	//敵の初期化
 	enemy_->Initialize(model, {0.5f,0.0f,-0.5f});
 	
+	//天球の生成
 	skydome_ = new Skydome();
-
+	//天球の初期化
 	skydome_->Initialize(modelSkydome_);
 
-	
+	//レールカメラの生成
+	railCamera_ = new RailCamera();
+	//レールカメラの初期化
+	railCamera_->Initialize(worldTransform_);
 }
 
 void GameScene::Update() {
@@ -68,8 +76,11 @@ void GameScene::Update() {
 	//当たり判定
 	CheckAllCollisions();
 
-	//天球
+	//天球の更新
 	skydome_->Update();
+
+	//レールカメラの更新
+	railCamera_->Update();
 
 	//デバッグカメラの更新
 	debugCamera_->Update();
