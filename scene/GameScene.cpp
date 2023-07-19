@@ -32,7 +32,7 @@ void GameScene::Initialize() {
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	//ビュープロジェクションの初期化
-	viewProjection.farZ = 100;
+	viewProjection.farZ = 1000;
 	viewProjection.Initialize();
 
 	//自キャラの生成

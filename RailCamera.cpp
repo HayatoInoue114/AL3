@@ -12,7 +12,7 @@ void RailCamera::Update() {
 	Vector3 rotate = {0, 0, 100.0f};
 	worldTransform_.rotation_ = Add(worldTransform_.rotation_, rotate);
 
-	//ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚©‚çƒrƒ…[s—ñ‚ğŒvZ‚·‚é
+	//ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‹ã‚‰ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹
 	viewProjection_.matView = Inverse(worldTransform_.matWorld_);
 
 
@@ -25,7 +25,7 @@ void RailCamera::Update() {
 
 	float rotation[3] = {
 	    worldTransform_.rotation_.x, worldTransform_.rotation_.y, worldTransform_.rotation_.z};
-	//ƒJƒƒ‰‚ÌÀ•W‚ğ‰æ–Ê•\¦‚·‚éˆ—
+	//ã‚«ãƒ¡ãƒ©ã®åº§æ¨™ã‚’ç”»é¢è¡¨ç¤ºã™ã‚‹å‡¦ç†
 	ImGui::Begin("Camera");
 	ImGui::SliderFloat3("translation", translation, -30.0f, 100.0f);
 	ImGui::SliderFloat3("rotation", rotation, -30, 120);

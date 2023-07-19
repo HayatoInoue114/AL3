@@ -14,6 +14,7 @@ void EnemyStateApproach::FireAndResetCallback() {
 	// timedCalls_.push_back(timedCall);
 }
 
+
 EnemyStateApproach::~EnemyStateApproach() {
 	for (TimedCall* timedCall : timedCalls_) {
 		delete timedCall;
