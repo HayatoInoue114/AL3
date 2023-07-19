@@ -79,8 +79,10 @@ void GameScene::Update() {
 	//天球の更新
 	skydome_->Update();
 
-	//レールカメラの更新
+	// レールカメラの更新
 	railCamera_->Update();
+	viewProjection.matView = railCamera_->GetViewProjection().matView;
+	viewProjection.matProjection = railCamera_->GetViewProjection().matProjection;
 
 	//デバッグカメラの更新
 	debugCamera_->Update();
@@ -106,6 +108,8 @@ void GameScene::Update() {
 		//ビュープロジェクション行列の更新と転送
 		viewProjection.UpdateMatrix();
 	}
+
+	
 }
 
 void GameScene::Draw() {
