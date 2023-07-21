@@ -8,7 +8,7 @@ public:
 /// <summary>
 /// 初期化
 /// </summary>
-	void Initialize(WorldTransform& worldTransform);
+	void Initialize(Vector3 translation, Vector3 rotate);
 
 /// <summary>
 /// 更新
@@ -20,6 +20,11 @@ public:
 	/// </summary>
 	/// <returns>ビュープロジェクション</returns>
 	const ViewProjection& GetViewProjection() { return viewProjection_; }
+
+	/// <summary>
+	/// ワールド座標を取得
+	/// </summary>
+	WorldTransform GetWorldTransform() { return worldTransform_; }
 
 private:
 	//ワールド変換データ

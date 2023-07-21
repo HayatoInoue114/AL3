@@ -32,13 +32,20 @@ void GameScene::Initialize() {
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	//ビュープロジェクションの初期化
-	viewProjection.farZ = 1000;
+	viewProjection.farZ = 500;
 	viewProjection.Initialize();
+
+	// レールカメラの生成
+	railCamera_ = new RailCamera();
+	// レールカメラの初期化
+	railCamera_->Initialize({0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f});
 
 	//自キャラの生成
 	player_ = new Player();
+	Vector3 playerPosition(0, 0, 0.1f);
 	//自キャラの初期化
-	player_->Initialize(model,textureHandle);
+	player_->Initialize(model,textureHandle,playerPosition);
+	
 
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -60,13 +67,17 @@ void GameScene::Initialize() {
 	//天球の初期化
 	skydome_->Initialize(modelSkydome_);
 
-	//レールカメラの生成
-	railCamera_ = new RailCamera();
-	//レールカメラの初期化
-	railCamera_->Initialize(worldTransform_);
+	// 自キャラとレールカメラの親子関係を結ぶ
+	player_->SetParent(&railCamera_->GetWorldTransform());
 }
 
 void GameScene::Update() {
+	// レールカメラの更新
+	railCamera_->Update();
+	viewProjection.matView = railCamera_->GetViewProjection().matView;
+	viewProjection.matProjection = railCamera_->GetViewProjection().matProjection;
+	viewProjection.TransferMatrix();
+
 	//自キャラの更新
 	player_->Update();
 
@@ -79,37 +90,32 @@ void GameScene::Update() {
 	//天球の更新
 	skydome_->Update();
 
-	// レールカメラの更新
-	railCamera_->Update();
-	viewProjection.matView = railCamera_->GetViewProjection().matView;
-	viewProjection.matProjection = railCamera_->GetViewProjection().matProjection;
+	
 
 	//デバッグカメラの更新
-	debugCamera_->Update();
-#ifdef _DEBUG
-	if (input_->TriggerKey(DIK_LALT)) {
-		if (isDebugCameraActive_ == false) {
-			isDebugCameraActive_ = true;
-		} else {
-			isDebugCameraActive_ = false;
-		}
-		
-	}
-#endif // DEBUG
-
-	//カメラの処理
-	if (isDebugCameraActive_) {
-		debugCamera_->Update();
-		viewProjection.matView = debugCamera_->GetViewProjection().matView;
-		viewProjection.matProjection = debugCamera_->GetViewProjection().matProjection;
-		//ビュープロジェクション行列の転送
-		viewProjection.TransferMatrix();
-	} else {
-		//ビュープロジェクション行列の更新と転送
-		viewProjection.UpdateMatrix();
-	}
-
-	
+//	debugCamera_->Update();
+//#ifdef _DEBUG
+//	if (input_->TriggerKey(DIK_LALT)) {
+//		if (isDebugCameraActive_ == false) {
+//			isDebugCameraActive_ = true;
+//		} else {
+//			isDebugCameraActive_ = false;
+//		}
+//		
+//	}
+//#endif // DEBUG
+//
+//	//カメラの処理
+//	if (isDebugCameraActive_) {
+//		debugCamera_->Update();
+//		viewProjection.matView = debugCamera_->GetViewProjection().matView;
+//		viewProjection.matProjection = debugCamera_->GetViewProjection().matProjection;
+//		//ビュープロジェクション行列の転送
+//		viewProjection.TransferMatrix();
+//	} else {
+//		//ビュープロジェクション行列の更新と転送
+//		viewProjection.UpdateMatrix();
+//	}
 }
 
 void GameScene::Draw() {

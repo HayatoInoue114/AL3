@@ -27,6 +27,10 @@ Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2);
 Matrix4x4 Subtract(const Matrix4x4& m1, const Matrix4x4& m2);
 // 行列の積
 Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2);
+
+float InverseNum(const Matrix4x4& m, int a, int b, int c, int d, int e, int f, int g, int h);
+float InverseNum2(const Matrix4x4& m, int a, int b, int c, int d, int e, int f);
+
 // 逆行列
 Matrix4x4 Inverse(const Matrix4x4& m);
 // 転置行列

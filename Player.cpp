@@ -12,7 +12,7 @@ Player::~Player() {
 	}
 }
 
-void Player::Initialize(Model* model, uint32_t textureHandle) { 
+void Player::Initialize(Model* model, uint32_t textureHandle, Vector3 playerPosition) { 
 	assert(model); 
 
 	//引数として受け取ったデータをメンバ変数に記録する
@@ -23,6 +23,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 	input_ = Input::GetInstance();
 
 	worldTransform_.Initialize();
+	worldTransform_.translation_ = {playerPosition};
 }
 
 void Player::Update() { 
@@ -164,4 +165,9 @@ Vector3 Player::GetWorldPosition() {
 
 void Player::OnCollision() {
 
+}
+
+void Player::SetParent(const WorldTransform* parent) {
+	//親子関係を結ぶ
+	worldTransform_.parent_ = parent;
 }
