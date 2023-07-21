@@ -24,7 +24,7 @@ public:
 	/// <summary>
 	/// ワールド座標を取得
 	/// </summary>
-	WorldTransform GetWorldTransform() { return worldTransform_; }
+	WorldTransform& GetWorldTransform() { return worldTransform_; }
 
 private:
 	//ワールド変換データ
