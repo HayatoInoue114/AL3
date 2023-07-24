@@ -13,6 +13,9 @@ GameScene::~GameScene() {
 	delete skydome_;
 	delete modelSkydome_;
 	delete railCamera_;
+	for (EnemyBullet* enemyBullet : enemyBullets_) {
+		delete enemyBullet;
+	}
 }
 
 void GameScene::Initialize() {
@@ -61,6 +64,7 @@ void GameScene::Initialize() {
 	enemy_->SetPlayer(player_);
 	//敵の初期化
 	enemy_->Initialize(model, {0.5f,0.0f,80.0f});
+	enemy_->SetGameScene(this);
 	
 	//天球の生成
 	skydome_ = new Skydome();
@@ -83,6 +87,19 @@ void GameScene::Update() {
 
 	//敵の更新
 	enemy_->Update();
+
+	// デスフラグの立った弾を削除
+	enemyBullets_.remove_if([](EnemyBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
+
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Update();
+	}
 
 	//当たり判定
 	CheckAllCollisions();
@@ -148,6 +165,11 @@ void GameScene::Draw() {
 
 	player_->Draw(viewProjection);
 
+	// 弾描画
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Draw(viewProjection);
+	}
+
 	enemy_->Draw(viewProjection);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
@@ -168,41 +190,44 @@ void GameScene::Draw() {
 }
 
 void GameScene::CheckAllCollisions() { 
-	Vector3 posA, posB;
 
 	//自弾リストの取得
 	const std::list<PlayerBullet*>& playerBullets = player_->GetBullets();
 	//敵弾リストの取得
-	const std::list<EnemyBullet*>& enemyBullets = enemy_->GetBullets();
+	const std::list<EnemyBullet*>& enemyBullets = enemyBullets_;
 
 	#pragma region 
-	posA = player_->GetWorldPosition();
+	Vector3 playerPosition = player_->GetWorldPosition();
 
-	for (EnemyBullet* bullet : enemyBullets) {
-		posB = bullet->GetWorldPosition();
+	Vector3 enemyPosition = enemy_->GetWorldPosition();
 
-		Vector3 AtoB = Subtract(posA, posB);
-		float dot = (AtoB.x * AtoB.x) + (AtoB.y * AtoB.y) + (AtoB.z * AtoB.z);
+	for (EnemyBullet* enemyBullet : enemyBullets) {
+		for (PlayerBullet* playerBullet : playerBullets) {
+			//敵弾と自機
+			Vector3 enemyBulletPosition = enemyBullet->GetWorldPosition();
 
-		if (dot <= 5) {
-			player_->OnCollision();
-			bullet->OnCollision();
-		}
-	}
+			Vector3 distanceToEnemyBullet = Subtract(playerPosition, enemyBulletPosition);
+			float dotEnemyBullet = (distanceToEnemyBullet.x * distanceToEnemyBullet.x) +
+			                       (distanceToEnemyBullet.y * distanceToEnemyBullet.y) +
+			                       (distanceToEnemyBullet.z * distanceToEnemyBullet.z);
 
-	Vector3 enemyPosition, playerBulletPosition;
+			if (dotEnemyBullet <= 5) {
+				player_->OnCollision();
+				enemyBullet->OnCollision();
+			}
 
-	enemyPosition = enemy_->GetWorldPosition();
+			//自弾と敵
+			Vector3 playerBulletPosition = playerBullet->GetWorldPosition();
 
-	for (PlayerBullet* bullet : playerBullets) {
-		playerBulletPosition = bullet->GetWorldPosition();
+			Vector3 distanceToPlayerBullet = Subtract(enemyPosition, playerBulletPosition);
+			float dotPlayerBullet = (distanceToPlayerBullet.x * distanceToPlayerBullet.x) +
+			                        (distanceToPlayerBullet.y * distanceToPlayerBullet.y) +
+			                        (distanceToPlayerBullet.z * distanceToPlayerBullet.z);
 
-		Vector3 AtoB = Subtract(enemyPosition, playerBulletPosition);
-		float dot = (AtoB.x * AtoB.x) + (AtoB.y * AtoB.y) + (AtoB.z * AtoB.z);
-
-		if (dot <= 5) {
-			player_->OnCollision();
-			bullet->OnCollision();
+			if (dotPlayerBullet <= 5) {
+				player_->OnCollision();
+				playerBullet->OnCollision();
+			}
 		}
 	}
 
@@ -213,4 +238,9 @@ void GameScene::CheckAllCollisions() {
 
 	#pragma region
 	#pragma endregion
+}
+
+void GameScene::AddEnemyBullet(EnemyBullet* enemhyBullet) {
+	//リストに登録する
+	enemyBullets_.push_back(enemhyBullet);
 }

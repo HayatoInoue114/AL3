@@ -14,6 +14,8 @@
 #include "Skydome.h"
 #include "RailCamera.h"
 
+class Enemy;
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -49,6 +51,12 @@ public: // メンバ関数
 /// 衝突判定を応答
 /// </summary>
 	void CheckAllCollisions();
+
+/// <summary>
+/// 敵弾を追加する
+/// </summary>
+/// <param name="enemyBullet">敵弾</param>
+	void AddEnemyBullet(EnemyBullet* enemyBullet);
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -89,4 +97,7 @@ private: // メンバ変数
 
 	//レールカメラ
 	RailCamera* railCamera_ = nullptr;
+
+	// 弾
+	std::list<EnemyBullet*> enemyBullets_;
 };

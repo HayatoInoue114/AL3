@@ -16,9 +16,7 @@ Enemy::Enemy() {
 Enemy::~Enemy() { 
 	/*delete state_;
 	delete player_;*/
-	for (EnemyBullet* enemyBullet : bullets_) {
-		delete enemyBullet;
-	}
+	
 	
 }
 
@@ -61,28 +59,14 @@ void Enemy::Update() {
 	//worldTransform_.matWorld_ = MakeAffineMatrix(
 	//    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 
-	// デスフラグの立った弾を削除
-	bullets_.remove_if([](EnemyBullet* bullet) {
-		if (bullet->IsDead()) {
-			delete bullet;
-			return true;
-		}
-		return false;
-	});
-
-	for (EnemyBullet* bullet : bullets_) {
-		bullet->Update();
-	}
+	
 	
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransferMatrix();
 }
 
 void Enemy::Draw(const ViewProjection& viewProjection) { 
-	// 弾描画
-	for (EnemyBullet* bullet : bullets_) {
-		bullet->Draw(viewProjection);
-	}
+	
 	model_->Draw(worldTransform_, viewProjection, textureHandle_);
 }
 
@@ -114,7 +98,8 @@ void Enemy::Fire() {
 	newBullet->Initialize(model_, GetWorldPosition(), velocity_);
 
 	// 弾を登録する
-	bullets_.push_back(newBullet);
+	gameScene_->AddEnemyBullet(newBullet);
+
 }
 
 

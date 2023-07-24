@@ -7,7 +7,10 @@
 #include "WorldTransform.h"
 #include <assert.h>
 #include "EnemyState.h"
+#include "GameScene.h"
 
+
+class GameScene;
 class Enemy;
 class Player;
 class BaseEnemyState;
@@ -62,9 +65,6 @@ public:
 	// 衝突を検出したら呼び出されるコールバック関数
 	void OnCollision();
 
-	// 弾リストを取得
-	const std::list<EnemyBullet*>& GetBullets() const { return bullets_; }
-
 	void SetPlayer(Player* player) { player_ = player; }
 
 	enum class Phase {
@@ -78,6 +78,8 @@ public:
 
 	void ChangePosition(Vector3 vector);
 	Vector3 GetTranslation() { return worldTransform_.translation_; }
+
+	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
 
 private:
 	// ワールド変換データ
@@ -107,8 +109,7 @@ private:
 	// 発射タイマー
 	int32_t fireCount = 0;
 
-	// 弾
-	std::list<EnemyBullet*> bullets_;
+	
 
 	//// 次元発動のリスト
 	//std::list<TimedCall*> timedCalls_;
@@ -121,4 +122,6 @@ private:
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/
+
+	GameScene* gameScene_ = nullptr;
 };
