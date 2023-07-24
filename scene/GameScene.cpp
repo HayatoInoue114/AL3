@@ -42,7 +42,7 @@ void GameScene::Initialize() {
 
 	//自キャラの生成
 	player_ = new Player();
-	Vector3 playerPosition(0, 0, 0.1f);
+	Vector3 playerPosition(0, 0, 50.0f);
 	//自キャラの初期化
 	player_->Initialize(model,textureHandle,playerPosition);
 	
@@ -60,7 +60,7 @@ void GameScene::Initialize() {
 	// 敵キャラに自キャラのアドレスを渡す
 	enemy_->SetPlayer(player_);
 	//敵の初期化
-	enemy_->Initialize(model, {0.5f,0.0f,-0.5f});
+	enemy_->Initialize(model, {0.5f,0.0f,80.0f});
 	
 	//天球の生成
 	skydome_ = new Skydome();
