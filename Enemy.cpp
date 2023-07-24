@@ -20,7 +20,7 @@ Enemy::~Enemy() {
 	
 }
 
-void Enemy::Initialize(Model* model, Vector3 position) {
+void Enemy::Initialize(Model* model, Vector3 position,GameScene* gameScene) {
 	// NULLポインタチェック
 	assert(model);
 
@@ -31,6 +31,8 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 	worldTransform_.Initialize();
 	// 引数で受け取った初期座標をセット
 	worldTransform_.translation_ = {position};
+
+	SetGameScene(gameScene);
 
 	state_->Initialize(this);
 }
@@ -59,8 +61,6 @@ void Enemy::Update() {
 	//worldTransform_.matWorld_ = MakeAffineMatrix(
 	//    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 
-	
-	
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransferMatrix();
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "TimedCall.h"
 
 class Enemy;
 

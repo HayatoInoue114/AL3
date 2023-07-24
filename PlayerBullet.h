@@ -9,22 +9,22 @@ public:
 	PlayerBullet();
 	~PlayerBullet();
 
-/// <summary>
-/// 初期化
-/// </summary>
-/// <param name="model">モデル</param>
-/// <param name="position">初期座標</param>
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="model">モデル</param>
+	/// <param name="position">初期座標</param>
 	void Initialize(Model* model, const Vector3& position, const Vector3& velocity);
 
-/// <summary>
-/// 更新
-/// </summary>
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
-/// <summary>
-/// 描画
-/// </summary>
-/// <param name="viewProjection">ビュープロジェクション</param>
+	/// <summary>
+	/// 描画
+	/// </summary>
+	/// <param name="viewProjection">ビュープロジェクション</param>
 	void Draw(const ViewProjection& viewProjection);
 
 	// 衝突を検出したら呼び出されるコールバック関数
@@ -45,16 +45,14 @@ private:
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 
-	//速度
+	// 速度
 	Vector3 velocity_;
 
-	//寿命<frm>
+	// 寿命<frm>
 	static const int32_t kLifeTime = 60 * 5;
 
-	//デスタイマー
+	// デスタイマー
 	int32_t deathTimer_ = kLifeTime;
-	//デスフラグ
+	// デスフラグ
 	bool isDead_ = false;
 };
-
-

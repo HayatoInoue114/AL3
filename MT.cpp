@@ -4,8 +4,6 @@
 #include <cmath>
 #include <math.h>
 
-
-
 Vector3 Add(const Vector3& v1, const Vector3& v2) {
 	Vector3 num = {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
 	return num;
@@ -36,12 +34,12 @@ Vector3 Normalize(const Vector3& v) {
 	return num;
 }
 
-//void VectorScreenPrintf(int x, int y, const Vector3& vector, const char* label) {
+// void VectorScreenPrintf(int x, int y, const Vector3& vector, const char* label) {
 //	Novice::ScreenPrintf(x, y, "%.02f", vector.x);
 //	Novice::ScreenPrintf(x + kColumnWidth, y, "%.02f", vector.y);
 //	Novice::ScreenPrintf(x + kColumnWidth * 2, y, "%.02f", vector.z);
 //	Novice::ScreenPrintf(x + kColumnWidth * 3, y, "%s", label);
-//}
+// }
 
 Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2) {
 	Matrix4x4 mat = {m1.m[0][0] + m2.m[0][0], m1.m[0][1] + m2.m[1][1], m1.m[0][2] + m2.m[0][2],
@@ -265,22 +263,33 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 	Matrix4x4 rotateMatrix = Multiply(rotateXMatrix, Multiply(rotateYMatrix, rotateZMatrix));
 
 	Matrix4x4 mat = {
-	    scale.x * rotateMatrix.m[0][0],scale.x * rotateMatrix.m[0][1],scale.x * rotateMatrix.m[0][2],0,
-	    scale.y * rotateMatrix.m[1][0],scale.y * rotateMatrix.m[1][1],scale.y * rotateMatrix.m[1][2],0,
-	    scale.z * rotateMatrix.m[2][0],scale.z * rotateMatrix.m[2][1],scale.z * rotateMatrix.m[2][2],0,
-	    translate.x,translate.y,translate.z,1
-	};
+	    scale.x * rotateMatrix.m[0][0],
+	    scale.x * rotateMatrix.m[0][1],
+	    scale.x * rotateMatrix.m[0][2],
+	    0,
+	    scale.y * rotateMatrix.m[1][0],
+	    scale.y * rotateMatrix.m[1][1],
+	    scale.y * rotateMatrix.m[1][2],
+	    0,
+	    scale.z * rotateMatrix.m[2][0],
+	    scale.z * rotateMatrix.m[2][1],
+	    scale.z * rotateMatrix.m[2][2],
+	    0,
+	    translate.x,
+	    translate.y,
+	    translate.z,
+	    1};
 	return mat;
 }
 
-//void MatrixScreenPrintf(int x, int y, const Matrix4x4& matrix) {
+// void MatrixScreenPrintf(int x, int y, const Matrix4x4& matrix) {
 //	for (int row = 0; row < 4; ++row) {
 //		for (int column = 0; column < 4; ++column) {
 //			Novice::ScreenPrintf(
 //			    x + column * kColumnWidth, y + row * kRowHeight, "%6.02f", matrix.m[row][column]);
 //		}
 //	}
-//}
+// }
 
 Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip) {
 	Matrix4x4 mat = {
@@ -356,7 +365,7 @@ Vector3 Cross(const Vector3& v1, const Vector3& v2) {
 	return num;
 }
 
-Vector3 TransformNormal(const Vector3& v,const Matrix4x4& m) {
+Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 	Vector3 result{
 	    v.x * m.m[0][0] + v.y * m.m[1][0] + v.z * m.m[2][0],
 	    v.x * m.m[0][1] + v.y * m.m[1][1] + v.z * m.m[2][1],

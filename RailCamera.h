@@ -1,18 +1,18 @@
 #pragma once
-#include "WorldTransform.h"
 #include "Model.h"
+#include "WorldTransform.h"
 #include <imgui.h>
 
 class RailCamera {
 public:
-/// <summary>
-/// 初期化
-/// </summary>
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize(Vector3 translation, Vector3 rotate);
 
-/// <summary>
-/// 更新
-/// </summary>
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
 	/// <summary>
@@ -27,11 +27,9 @@ public:
 	WorldTransform& GetWorldTransform() { return worldTransform_; }
 
 private:
-	//ワールド変換データ
+	// ワールド変換データ
 	WorldTransform worldTransform_;
 
-	//ビュープロジェクション
+	// ビュープロジェクション
 	ViewProjection viewProjection_;
 };
-
-

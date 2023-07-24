@@ -1,22 +1,18 @@
 #pragma once
 #include "EnemyBullet.h"
+#include "EnemyState.h"
+#include "GameScene.h"
 #include "MT.h"
 #include "Model.h"
 #include "TimedCall.h"
 #include "Vector3.h"
 #include "WorldTransform.h"
 #include <assert.h>
-#include "EnemyState.h"
-#include "GameScene.h"
-
 
 class GameScene;
 class Enemy;
 class Player;
 class BaseEnemyState;
-
-
-
 
 /// <summary>
 /// 敵
@@ -29,7 +25,7 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="model">モデル</param>
-	void Initialize(Model* model, Vector3 position);
+	void Initialize(Model* model, Vector3 position, GameScene* gameScene);
 
 	/// <summary>
 	/// 更新
@@ -81,6 +77,8 @@ public:
 
 	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
 
+	
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -104,15 +102,13 @@ private:
 	BaseEnemyState* state_;
 
 	//// 弾を発射する間隔
-	//static const uint32_t kFireInterval = 30;
+	// static const uint32_t kFireInterval = 30;
 
 	// 発射タイマー
 	int32_t fireCount = 0;
 
-	
-
 	//// 次元発動のリスト
-	//std::list<TimedCall*> timedCalls_;
+	// std::list<TimedCall*> timedCalls_;
 
 	Player* player_ = nullptr;
 

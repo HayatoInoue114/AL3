@@ -12,9 +12,6 @@ void EnemyBullet::Initialize(Model* model, const Vector3& position, const Vector
 	// テクスチャ読み込み
 	textureHandle_ = TextureManager::Load("ball.png");
 
-	
-
-
 	// Z方向に伸びた形状
 	worldTransform_.scale_ = {0.5f, 0.5f, 3.0f};
 
@@ -41,8 +38,6 @@ void EnemyBullet::Update() {
 	if (--deathTimer_ <= 0) {
 		isDead_ = true;
 	}
-
-
 }
 
 void EnemyBullet::Draw(const ViewProjection& viewProjection) {
@@ -54,8 +49,7 @@ Vector3 EnemyBullet::GetWorldPosition() {
 	Vector3 worldPos = {};
 	// ワールド行列の平行移動成分を取得(ワールド座標)
 	worldPos = {
-	    worldTransform_.matWorld_.m[3][0],
-		worldTransform_.matWorld_.m[3][1],
+	    worldTransform_.matWorld_.m[3][0], worldTransform_.matWorld_.m[3][1],
 	    worldTransform_.matWorld_.m[3][2]};
 	return worldPos;
 }
