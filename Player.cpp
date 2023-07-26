@@ -24,11 +24,20 @@ void Player::Initialize(Model* model, uint32_t textureHandle, Vector3 playerPosi
 
 	worldTransform_.Initialize();
 	worldTransform_.translation_ = {playerPosition};
+
+	//3Dレティクルのワールドトランスフォーム初期化
+	worldTransform3DReticle_.Initialize();
 }
 
 void Player::Update() {
 	/*worldTransform_.TransferMatrix();*/
 
+	//自機から3Dレティクルへの距離
+	const float kDistanceplayerTo3DReticle = 50.0f;
+	//自機から3Dレティクルへのオフセット(Z+向き)
+	Vector3 offset = {0, 0, 1.0f};
+	//自機のワールド行列の回転を反映
+	
 	// デスフラグの立った弾を削除
 	bullets_.remove_if([](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {

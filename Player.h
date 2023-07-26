@@ -60,6 +60,9 @@ public:
 	/// </summary>
 	/// <param name="model">親となるワールドトランスフォーム</param>
 	void SetParent(const WorldTransform* parent);
+	
+	//3Dレティクル用のトランスフォーム
+	WorldTransform worldTransform3DReticle_;
 
 private:
 	// ワールド変換データ
