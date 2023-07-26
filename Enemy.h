@@ -25,7 +25,7 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="model">モデル</param>
-	void Initialize(Model* model, Vector3 position, GameScene* gameScene);
+	void Initialize(Model* model, Vector3 position);
 
 	/// <summary>
 	/// 更新
@@ -38,9 +38,7 @@ public:
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	void Draw(const ViewProjection& viewProjection);
 
-	/// <summary>
-	/// 弾発射
-	/// </summary>
+	//GameSceneの弾発射
 	void Fire();
 
 	/*/// <summary>

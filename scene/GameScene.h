@@ -14,6 +14,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include <sstream>
+#include "TimedCall.h"
 
 class Enemy;
 
@@ -72,6 +73,16 @@ public: // メンバ関数
 	// 敵を発生させる
 	void EnemySpawn(Vector3 position);
 
+	/// <summary>
+	/// 敵弾発射
+	/// </summary>
+	void EnemyFire();
+
+	/// <summary>
+	/// 弾を発射し、タイマーをリセットするコールバック関数
+	/// </summary>
+	void FireAndResetCallback();
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -101,7 +112,7 @@ private: // メンバ変数
 	DebugCamera* debugCamera_ = nullptr;
 
 	// 敵
-	Enemy* enemy_ = nullptr;
+	std::list<Enemy*> enemies_;
 
 	// 天球
 	Skydome* skydome_ = nullptr;
@@ -120,4 +131,9 @@ private: // メンバ変数
 
 	bool isWaiting_ = false;
 	int waitTimer_ = 0;
+
+	// 弾を発射する間隔
+	static const uint32_t kFireInterval = 30;
+	// 次元発動のリスト
+	std::list<TimedCall*> timedCalls_;
 };

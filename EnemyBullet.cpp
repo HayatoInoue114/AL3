@@ -12,10 +12,11 @@ void EnemyBullet::Initialize(Model* model, const Vector3& position, const Vector
 	// テクスチャ読み込み
 	textureHandle_ = TextureManager::Load("ball.png");
 
+	worldTransform_.Initialize();
+
 	// Z方向に伸びた形状
 	worldTransform_.scale_ = {0.5f, 0.5f, 3.0f};
 
-	worldTransform_.Initialize();
 	// 引数で受け取った初期座標をセット
 	worldTransform_.translation_ = {position};
 

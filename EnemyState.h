@@ -15,17 +15,11 @@ class EnemyStateApproach : public BaseEnemyState {
 	~EnemyStateApproach();
 	void Initialize(Enemy* enemy) override;
 	void Update(Enemy* pEnemy) override;
-	/// <summary>
-	/// 弾を発射し、タイマーをリセットするコールバック関数
-	/// </summary>
-	void FireAndResetCallback();
+	
 
 private:
 	Enemy* enemy_;
-	// 弾を発射する間隔
-	static const uint32_t kFireInterval = 30;
-	// 次元発動のリスト
-	std::list<TimedCall*> timedCalls_;
+	
 };
 
 // 逃げてく
