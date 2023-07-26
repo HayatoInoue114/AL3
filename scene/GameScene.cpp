@@ -192,7 +192,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	/*skydome_->Draw(viewProjection);*/
+	//skydome_->Draw(viewProjection);
 
 	player_->Draw(viewProjection);
 
@@ -353,7 +353,7 @@ void GameScene::EnemySpawn(Vector3 position) {
 void GameScene::LoadEnemyPopData() {
 	// ファイルを開く
 	std::ifstream file;
-	file.open("./Resources./enemyPop.csv");
+	file.open("./Resources./csv./enemyPop.csv");
 	assert(file.is_open());
 
 	// ファイルの内容を文字列ストリームにコピー
