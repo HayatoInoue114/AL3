@@ -109,7 +109,7 @@ void Player::Update(ViewProjection viewProjection) {
 	Rotate();
 
 
-		// 自機から3Dレティクルへの距離
+	// 自機から3Dレティクルへの距離
 	const float kDistanceplayerTo3DReticle = 50.0f;
 
 	// 自機のワールド行列の回転を反映
@@ -126,6 +126,9 @@ void Player::Update(ViewProjection viewProjection) {
 	    Multiply(viewProjection.matView, Multiply(viewProjection.matProjection, matViewport));
 	positionReticle = Transform(positionReticle, matViewProjectionViewport);
 
+
+
+	//マウス座標（スクリーン座標）を取得する
 	POINT mousePosition;
 	GetCursorPos(&mousePosition);
 
@@ -133,36 +136,28 @@ void Player::Update(ViewProjection viewProjection) {
 	HWND hwnd = WinApp::GetInstance()->GetHwnd();
 	ScreenToClient(hwnd, &mousePosition);
 
-	positionReticle = {GetCursorPosition().x, GetCursorPosition().y, 0};
+	sprite2DReticle_->SetPosition(Vector2(mousePosition.x, mousePosition.y));
 
-	sprite2DReticle_->SetPosition(Vector2(positionReticle.x, positionReticle.y));
-
-	//ビュープロジェクションビューポート合成行列
 	Matrix4x4 matVPV =
 	    Multiply(viewProjection.matView, Multiply(viewProjection.matProjection, matViewport));
-	//合成行列の逆行列を計算する
 	Matrix4x4 matInverseVPV = Inverse(matVPV);
 
-	//スクリーン座標
+	// Vector3 posNear = Vector3(mousePosition.x - 640, mousePosition.y, 0);
+	// Vector3 posFar = Vector3(mousePosition.x-640, mousePosition.y, 1);
 	Vector3 posNear =
-	    Vector3(sprite2DReticle_->GetPosition().x, sprite2DReticle_->GetPosition().y, 0);
-
+	    Vector3(sprite2DReticle_->GetPosition().x - 640, sprite2DReticle_->GetPosition().y, 0);
 	Vector3 posFar =
-	    Vector3(sprite2DReticle_->GetPosition().x, sprite2DReticle_->GetPosition().y, 1);
-
-	//スクリーン座標系からワールド座標系へ
+	    Vector3(sprite2DReticle_->GetPosition().x - 640, sprite2DReticle_->GetPosition().y, 1);
 	posNear = Transform(posNear, matInverseVPV);
 	posFar = Transform(posFar, matInverseVPV);
 
-	//マウスレイの方向
-	Vector3 mouseDirection = Subtract(posNear, posFar);
+	Vector3 mouseDirection = Subtract(posFar, posNear);
 	mouseDirection = Normalize(mouseDirection);
 
-	//カメラから照準オブジェクトの距離
-	const float kDistanceTestObject = 100;
-	worldTransform3DReticle_.translation_ = Multiply(kDistanceTestObject, Add(posNear, mouseDirection));
-
-	
+	const float kDistanceTestObject = 150.0f;
+	worldTransform3DReticle_.translation_.x = posNear.x + mouseDirection.x * kDistanceTestObject;
+	worldTransform3DReticle_.translation_.y = posNear.y + mouseDirection.y * kDistanceTestObject;
+	worldTransform3DReticle_.translation_.z = posNear.z + mouseDirection.z * kDistanceTestObject;
 
 	worldTransform3DReticle_.UpdateMatrix();
 	worldTransform3DReticle_.TransferMatrix();
