@@ -1,4 +1,4 @@
-﻿#include "Player.h"
+#include "Player.h"
 #include "ImGuiManager.h"
 #include "MT.h"
 #include <cassert>
@@ -118,8 +118,6 @@ void Player::Update(ViewProjection viewProjection) {
 	offset = Multiply(kDistanceplayerTo3DReticle, Normalize(offset));
 	// 3Dレティクルの座標を設定
 	worldTransform3DReticle_.translation_ = Add(offset, worldTransform_.translation_);
-	worldTransform3DReticle_.UpdateMatrix();
-	worldTransform3DReticle_.TransferMatrix();
 
 	Vector3 positionReticle = worldTransform3DReticle_.translation_;
 	Matrix4x4 matViewport =
@@ -127,8 +125,57 @@ void Player::Update(ViewProjection viewProjection) {
 	Matrix4x4 matViewProjectionViewport =
 	    Multiply(viewProjection.matView, Multiply(viewProjection.matProjection, matViewport));
 	positionReticle = Transform(positionReticle, matViewProjectionViewport);
+
+	POINT mousePosition;
+	GetCursorPos(&mousePosition);
+
+	// クライアントエリア座標に変換する
+	HWND hwnd = WinApp::GetInstance()->GetHwnd();
+	ScreenToClient(hwnd, &mousePosition);
+
+	positionReticle = {GetCursorPosition().x, GetCursorPosition().y, 0};
+
 	sprite2DReticle_->SetPosition(Vector2(positionReticle.x, positionReticle.y));
 
+	//ビュープロジェクションビューポート合成行列
+	Matrix4x4 matVPV =
+	    Multiply(viewProjection.matView, Multiply(viewProjection.matProjection, matViewport));
+	//合成行列の逆行列を計算する
+	Matrix4x4 matInverseVPV = Inverse(matVPV);
+
+	//スクリーン座標
+	Vector3 posNear =
+	    Vector3(sprite2DReticle_->GetPosition().x, sprite2DReticle_->GetPosition().y, 0);
+
+	Vector3 posFar =
+	    Vector3(sprite2DReticle_->GetPosition().x, sprite2DReticle_->GetPosition().y, 1);
+
+	//スクリーン座標系からワールド座標系へ
+	posNear = Transform(posNear, matInverseVPV);
+	posFar = Transform(posFar, matInverseVPV);
+
+	//マウスレイの方向
+	Vector3 mouseDirection = Subtract(posNear, posFar);
+	mouseDirection = Normalize(mouseDirection);
+
+	//カメラから照準オブジェクトの距離
+	const float kDistanceTestObject = 100;
+	worldTransform3DReticle_.translation_ = Multiply(kDistanceTestObject, Add(posNear, mouseDirection));
+
+	
+
+	worldTransform3DReticle_.UpdateMatrix();
+	worldTransform3DReticle_.TransferMatrix();
+
+
+	ImGui::Begin("Player");
+	ImGui::Text(
+	    "2DReticle:(%f,%f)", sprite2DReticle_->GetPosition().x, sprite2DReticle_->GetPosition().y);
+	ImGui::Text("Near:(%+.2f,+%+.2f,%+.2f)", posNear.x, posNear.y, posNear.z);
+	ImGui::Text(
+	    "Far:(%+.2f,+%+.2f,%+.2f)", worldTransform3DReticle_.translation_.x,
+	    worldTransform3DReticle_.translation_.y, worldTransform3DReticle_.translation_.z);
+	ImGui::End();
 	// キャラクター攻撃処理
 	Attack();
 
@@ -213,3 +260,14 @@ void Player::SetParent(const WorldTransform* parent) {
 }
 
 void Player::DrawUI() { sprite2DReticle_->Draw(); }
+
+Vector2 Player::GetCursorPosition() {
+	POINT mousePosition;
+	GetCursorPos(&mousePosition);
+
+	//クライアントエリア座標に変換する
+	HWND hwnd = WinApp::GetInstance()->GetHwnd();
+	ScreenToClient(hwnd, &mousePosition);
+
+	return {(float)mousePosition.x,(float)mousePosition.y};
+}

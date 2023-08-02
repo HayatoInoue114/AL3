@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Input.h"
 #include "MT.h"
 #include "Model.h"
@@ -71,6 +71,11 @@ public:
 	/// UI描画
 	/// </summary>
 	void DrawUI();
+
+/// <summary>
+/// マウス座標を取得
+/// </summary>
+	Vector2 GetCursorPosition();
 
 private:
 	// ワールド変換データ
