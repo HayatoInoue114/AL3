@@ -30,6 +30,9 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	//レティクルのテクスチャ
+	TextureManager::Load("reticle.png");
+
 	// ファイル名を指定してテクスチャを読み込む
 	textureHandle = TextureManager::Load("godest.png");
 	// 3Dモデルの生成
@@ -105,7 +108,7 @@ void GameScene::Update() {
 	}
 
 	// 自キャラの更新
-	player_->Update();
+	player_->Update(viewProjection);
 
 	// 終了したタイマーを削除
 	timedCalls_.remove_if([](TimedCall* timedCall) {
@@ -214,6 +217,7 @@ void GameScene::Draw() {
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(commandList);
 
+	player_->DrawUI();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>

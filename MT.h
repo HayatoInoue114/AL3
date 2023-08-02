@@ -65,3 +65,5 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 
 //行列とベクトルの掛け算
 Vector3 Multyply(const Vector3& v, const Matrix4x4& m);
+
+Vector3 Transform(const Vector3& num, const Matrix4x4& m);

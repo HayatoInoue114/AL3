@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "PlayerBullet.h"
 #include "WorldTransform.h"
+#include <Sprite.h>
 #include <list>
 
 /// <summary>
@@ -24,7 +25,7 @@ public:
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update(ViewProjection viewProjection);
 
 	/// <summary>
 	/// 描画
@@ -46,6 +47,11 @@ public:
 	/// </summary>
 	Vector3 GetWorldPosition();
 
+	/// <summary>
+	/// レティクルワールド座標を取得
+	/// </summary>
+	Vector3 GetReticleWorldPosition(); 
+
 	// 衝突を検出したら呼び出されるコールバック関数
 	void OnCollision();
 
@@ -60,9 +66,11 @@ public:
 	/// </summary>
 	/// <param name="model">親となるワールドトランスフォーム</param>
 	void SetParent(const WorldTransform* parent);
-	
-	//3Dレティクル用のトランスフォーム
-	WorldTransform worldTransform3DReticle_;
+
+	/// <summary>
+	/// UI描画
+	/// </summary>
+	void DrawUI();
 
 private:
 	// ワールド変換データ
@@ -76,4 +84,14 @@ private:
 
 	// 弾
 	std::list<PlayerBullet*> bullets_;
+
+	Vector3 offset = {0, 0, 1.0f};
+
+	uint32_t reticleTextureHandle_ = 0u;
+
+	// 3Dレティクル用のトランスフォーム
+	WorldTransform worldTransform3DReticle_;
+
+	// 2Dレティクル用のスプライト
+	Sprite* sprite2DReticle_ = nullptr;
 };
