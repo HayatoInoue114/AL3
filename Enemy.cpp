@@ -39,7 +39,7 @@ void Enemy::Leave() {
 }
 
 void Enemy::ChangeState(BaseEnemyState* newState) {
-	delete state_;
+	/*delete state_;*/
 	state_ = newState;
 }
 

@@ -66,8 +66,6 @@ void Player::Update(ViewProjection viewProjection) {
 	// スプライトの現在座標を取得
 	Vector2 spritePosition = sprite2DReticle_->GetPosition();
 
-	XINPUT_STATE ioyState;
-
 	//ジョイスティック状態取得
 	if (Input::GetInstance()->GetJoystickState(0, joyState)) {
 		spritePosition.x += (float)joyState.Gamepad.sThumbRX / SHRT_MAX * 5.0f;
@@ -127,7 +125,7 @@ void Player::Update(ViewProjection viewProjection) {
 	Rotate();
 
 	// 自機から3Dレティクルへの距離
-	const float kDistanceplayerTo3DReticle = 50.0f;
+	//const float kDistanceplayerTo3DReticle = 50.0f;
 
 	//// 自機のワールド行列の回転を反映
 	//offset = Multyply(offset, worldTransform_.matWorld_);
