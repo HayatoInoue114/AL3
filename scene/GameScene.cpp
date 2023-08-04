@@ -291,7 +291,7 @@ void GameScene::CheckAllCollisions() {
 	// 敵弾リストの取得
 	const std::list<EnemyBullet*>& enemyBullets = enemyBullets_;
 	// 敵リストの取得
-	const std::list<Enemy*>& enemy = enemies_;
+	//const std::list<Enemy*>& enemy = enemies_;
 
 #pragma region 自キャラと敵弾の当たり判定
 	posA = player_->GetWorldPosition();
