@@ -12,13 +12,12 @@ public:
 
 // 近づく
 class EnemyStateApproach : public BaseEnemyState {
-	~EnemyStateApproach();
 	void Initialize(Enemy* enemy) override;
 	void Update(Enemy* pEnemy) override;
 	
 
 private:
-	Enemy* enemy_;
+	Enemy* enemy_ = {};
 	
 };
 
@@ -28,5 +27,5 @@ class EnemyStateLeave : public BaseEnemyState {
 	void Update(Enemy* pEnemy) override;
 
 private:
-	Enemy* enemy_;
+	Enemy* enemy_ = {};
 };

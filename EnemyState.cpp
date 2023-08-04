@@ -2,9 +2,7 @@
 
 
 
-EnemyStateApproach::~EnemyStateApproach() {
-	
-}
+
 
 void EnemyStateApproach::Initialize(Enemy* enemy) {
 	enemy_ = enemy;
@@ -23,7 +21,9 @@ void EnemyStateApproach::Update(Enemy* pEnemy) {
 	}
 }
 
-void EnemyStateLeave::Initialize(Enemy* enemy) { enemy_ = enemy; }
+void EnemyStateLeave::Initialize(Enemy* enemy) { 
+	enemy_ = enemy; 
+}
 
 void EnemyStateLeave::Update(Enemy* pEnemy) {
 	enemy_ = pEnemy;
