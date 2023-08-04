@@ -70,6 +70,11 @@ void Player::Update(ViewProjection viewProjection) {
 	if (Input::GetInstance()->GetJoystickState(0, joyState)) {
 		spritePosition.x += (float)joyState.Gamepad.sThumbRX / SHRT_MAX * 5.0f;
 		spritePosition.y -= (float)joyState.Gamepad.sThumbRY / SHRT_MAX * 5.0f;
+
+		spritePosition.x =
+		    std::clamp(spritePosition.x, 0.0f, (float)WinApp::kWindowWidth);
+		spritePosition.y = std::clamp(
+		    spritePosition.y, 0.0f, (float)WinApp::kWindowHeight);
 		//スプライトの座標変更を反映
 		sprite2DReticle_->SetPosition(spritePosition);
 	}
@@ -104,6 +109,8 @@ void Player::Update(ViewProjection viewProjection) {
 
 	worldTransform_.translation_.y =
 	    std::clamp(worldTransform_.translation_.y, -kMoveLimitY, kMoveLimitY);
+
+	
 
 	// 行列を定数バッファに転送
 	worldTransform_.UpdateMatrix();
@@ -165,6 +172,14 @@ void Player::Update(ViewProjection viewProjection) {
 	worldTransform3DReticle_.translation_.x = posNear.x + mouseDirection.x * kDistanceTestObject;
 	worldTransform3DReticle_.translation_.y = posNear.y + mouseDirection.y * kDistanceTestObject;
 	worldTransform3DReticle_.translation_.z = posNear.z + mouseDirection.z * kDistanceTestObject;
+
+	worldTransform3DReticle_.translation_.x = std::clamp(
+	    worldTransform3DReticle_.translation_.x, (float)-WinApp::kWindowWidth,
+	    (float)WinApp::kWindowWidth);
+
+	worldTransform3DReticle_.translation_.y = std::clamp(
+	    worldTransform3DReticle_.translation_.y, (float)-WinApp::kWindowHeight,
+	    (float)WinApp::kWindowHeight);
 
 	worldTransform3DReticle_.UpdateMatrix();
 	worldTransform3DReticle_.TransferMatrix();

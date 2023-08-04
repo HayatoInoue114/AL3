@@ -79,7 +79,7 @@ public:
 
 private:
 	// ワールド変換データ
-	WorldTransform worldTransform_;
+	WorldTransform worldTransform_ = {};
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
@@ -110,9 +110,9 @@ private:
 
 	Player* player_ = nullptr;
 
-	Vector3 velocity_;
+	Vector3 velocity_ = {};
 
-	Vector3 deltaVector_;
+	Vector3 deltaVector_ = {};
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/
