@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 
-void (Enemy::*Enemy::situation[])() = {&Enemy::Approach, &Enemy::Leave};
+void (Enemy::* Enemy::situation[])() = { &Enemy::Approach, &Enemy::Leave };
 
 Enemy::Enemy() {
 	state_ = new EnemyStateApproach();
@@ -11,8 +11,8 @@ Enemy::Enemy() {
 }
 
 Enemy::~Enemy() {
-	/*delete state_;
-	delete player_;*/
+	//delete state_;
+	delete player_;
 }
 
 void Enemy::Initialize(Model* model, Vector3 position) {
@@ -25,9 +25,9 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 
 	worldTransform_.Initialize();
 	// 引数で受け取った初期座標をセット
-	worldTransform_.translation_ = {position};
+	worldTransform_.translation_ = { position };
 
-	state_->Initialize(this);
+	state_ = new EnemyStateApproach();
 }
 
 void Enemy::Approach() {}
@@ -38,13 +38,16 @@ void Enemy::Leave() {
 	// worldTransform_.translation_ = Add(worldTransform_.translation_, move);
 }
 
-void Enemy::ChangeState(BaseEnemyState* newState) {
-	/*delete state_;*/
+void Enemy::ChangeState(IEnemyState* newState) {
+	//delete state_;
 	state_ = newState;
 }
 
 void Enemy::Update() {
 	state_->Update(this);
+	/*if (GetWorldPosition().z < -10.0f) {
+	ChangeState(new EnemyStateLeave());
+	}*/
 
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransferMatrix();
@@ -65,8 +68,8 @@ Vector3 Enemy::GetWorldPosition() {
 	Vector3 worldPos = {};
 	// ワールド行列の平行移動成分を取得(ワールド座標)
 	worldPos = {
-	    worldTransform_.matWorld_.m[3][0], worldTransform_.matWorld_.m[3][1],
-	    worldTransform_.matWorld_.m[3][2]};
+		worldTransform_.matWorld_.m[3][0], worldTransform_.matWorld_.m[3][1],
+		worldTransform_.matWorld_.m[3][2] };
 
 	return worldPos;
 }

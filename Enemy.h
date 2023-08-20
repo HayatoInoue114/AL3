@@ -1,6 +1,8 @@
 #pragma once
 #include "EnemyBullet.h"
-#include "EnemyState.h"
+#include "IEnemyState.h"
+#include "EnemyStateApproach.h"
+//#include "EnemyStateLeave.h"
 #include "GameScene.h"
 #include "MT.h"
 #include "Model.h"
@@ -12,7 +14,7 @@
 class GameScene;
 class Enemy;
 class Player;
-class BaseEnemyState;
+class IEnemyState;
 
 /// <summary>
 /// 敵
@@ -68,36 +70,36 @@ public:
 
 	void Approach();
 	void Leave();
-	void ChangeState(BaseEnemyState* newState);
+	void ChangeState(IEnemyState* newState);
 
 	void ChangePosition(Vector3 vector);
 	Vector3 GetTranslation() { return worldTransform_.translation_; }
 
 	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
 
-	
+
 
 private:
 	// ワールド変換データ
-	WorldTransform worldTransform_ = {};
+	WorldTransform worldTransform_;
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 
 	// フェーズ
-	Phase phase_ = Phase::Approach;
+	//Phase phase_ = Phase::Leave;
 
 	// キャラクターの移動ベクトル
-	Vector3 move = {0, 0, 0};
+	Vector3 move = { 0, 0, 0 };
 
 	// キャラクターの移動の速さ
 	const float kCharacterSpeed = 0.2f;
 
 	// メンバ関数ポインタ
-	static void (Enemy::*situation[])();
+	static void (Enemy::* situation[])();
 
-	BaseEnemyState* state_;
+	IEnemyState* state_;
 
 	//// 弾を発射する間隔
 	// static const uint32_t kFireInterval = 30;
@@ -110,9 +112,9 @@ private:
 
 	Player* player_ = nullptr;
 
-	Vector3 velocity_ = {};
+	Vector3 velocity_;
 
-	Vector3 deltaVector_ = {};
+	Vector3 deltaVector_;
 
 	/*EnemyStateApproach* approach_;
 	EnemyStateLeave* leave_;*/
