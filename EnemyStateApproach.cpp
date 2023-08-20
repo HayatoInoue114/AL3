@@ -1,9 +1,5 @@
 ﻿#include "EnemyStateApproach.h"
 
-//void EnemyStateApproach::Initialize(Enemy* enemy) {
-//	enemy_ = enemy;
-//}
-
 void EnemyStateApproach::Update(Enemy* pEnemy) {
 	Vector3 position = pEnemy->GetWorldPosition();
 

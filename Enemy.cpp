@@ -33,9 +33,6 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 void Enemy::Approach() {}
 
 void Enemy::Leave() {
-	// move = {kCharacterSpeed, kCharacterSpeed, 0};
-	////// 移動
-	// worldTransform_.translation_ = Add(worldTransform_.translation_, move);
 }
 
 void Enemy::ChangeState(IEnemyState* newState) {
