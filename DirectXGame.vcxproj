@@ -111,6 +111,8 @@
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyStateApproach.cpp" />
+    <ClCompile Include="EnemyStateLeave.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MT.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -142,6 +144,9 @@
     <ClInclude Include="base\TextureManager.h" />
     <ClInclude Include="base\WinApp.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyStateApproach.h" />
+    <ClInclude Include="EnemyStateLeave.h" />
+    <ClInclude Include="IEnemyState.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="math\Matrix4x4.h" />
     <ClInclude Include="math\Vector2.h" />
