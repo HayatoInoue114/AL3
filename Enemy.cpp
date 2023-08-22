@@ -28,6 +28,8 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 	worldTransform_.translation_ = { position };
 
 	state_ = new EnemyStateApproach();
+
+	changeStatePositionZ = 50.0f;
 }
 
 void Enemy::Approach() {}
@@ -42,9 +44,6 @@ void Enemy::ChangeState(IEnemyState* newState) {
 
 void Enemy::Update() {
 	state_->Update(this);
-	/*if (GetWorldPosition().z < -10.0f) {
-	ChangeState(new EnemyStateLeave());
-	}*/
 
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransferMatrix();
@@ -58,8 +57,6 @@ void Enemy::ChangePosition(Vector3 vector) {
 	worldTransform_.translation_ = Add(worldTransform_.translation_, vector);
 }
 
-void Enemy::Fire() { gameScene_->EnemyFire(); }
-
 Vector3 Enemy::GetWorldPosition() {
 	// ワールド座標を入れる変数
 	Vector3 worldPos = {};
@@ -72,3 +69,12 @@ Vector3 Enemy::GetWorldPosition() {
 }
 
 void Enemy::OnCollision() {}
+
+bool Enemy::IsChangeStatePosition() {
+	if (worldTransform_.translation_.z < changeStatePositionZ) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}

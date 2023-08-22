@@ -1,13 +1,17 @@
 ﻿#include "EnemyStateApproach.h"
+#include "Enemy.h"
+#include "EnemyStateLeave.h"
+#include "ImGuiManager.h"
+
 
 void EnemyStateApproach::Update(Enemy* pEnemy) {
-	Vector3 position = pEnemy->GetWorldPosition();
-
-	Vector3 move = { 0.01f, 0, -0.015f };
+	Vector3 move = { 0.01f, 0, -0.1f };
 
 	pEnemy->ChangePosition(move);
+
+	//Vector3 position = pEnemy->GetWorldPosition();
 	// 既定の位置に到達したら離脱
-	/*if (position.z < -10.0f) {
-		enemy_->ChangeState(new EnemyStateLeave());
-	}*/
+	if (pEnemy->IsChangeStatePosition()) {
+		pEnemy->ChangeState(new EnemyStateLeave());
+	}
 }

@@ -10,9 +10,6 @@ GameScene::~GameScene() {
 	delete model;
 	delete player_;
 	delete debugCamera_;
-	for (Enemy* enemy : enemies_) {
-		delete enemy;
-	}
 	delete skydome_;
 	delete modelSkydome_;
 	delete railCamera_;
@@ -21,6 +18,9 @@ GameScene::~GameScene() {
 	}
 	for (TimedCall* timedCall : timedCalls_) {
 		delete timedCall;
+	}
+	for (Enemy* enemy : enemies_) {
+		delete enemy;
 	}
 }
 
@@ -348,7 +348,6 @@ void GameScene::EnemySpawn(Vector3 position) {
 	Enemy* newEnemy = new Enemy();
 	newEnemy->SetPlayer(player_);
 	newEnemy->Initialize(model, position);
-	newEnemy->SetGameScene(this);
 	enemies_.push_back(newEnemy);
 }
 

@@ -2,7 +2,7 @@
 #include "EnemyBullet.h"
 #include "IEnemyState.h"
 #include "EnemyStateApproach.h"
-//#include "EnemyStateLeave.h"
+#include "EnemyStateLeave.h"
 #include "GameScene.h"
 #include "MT.h"
 #include "Model.h"
@@ -40,9 +40,6 @@ public:
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	void Draw(const ViewProjection& viewProjection);
 
-	//GameSceneの弾発射
-	void Fire();
-
 	/*/// <summary>
 	/// 接近フェーズ初期化
 	/// </summary>
@@ -75,9 +72,7 @@ public:
 	void ChangePosition(Vector3 vector);
 	Vector3 GetTranslation() { return worldTransform_.translation_; }
 
-	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
-
-
+	bool IsChangeStatePosition();
 
 private:
 	// ワールド変換データ
@@ -116,8 +111,6 @@ private:
 
 	Vector3 deltaVector_;
 
-	/*EnemyStateApproach* approach_;
-	EnemyStateLeave* leave_;*/
-
-	GameScene* gameScene_ = nullptr;
+	//敵がパターンを変えるPosition(Z)
+	float changeStatePositionZ;
 };

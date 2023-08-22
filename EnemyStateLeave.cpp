@@ -1,4 +1,5 @@
 #include "EnemyStateLeave.h"
+#include"Enemy.h"
 
 void EnemyStateLeave::Update(Enemy* pEnemy) {
 	Vector3 position = pEnemy->GetWorldPosition();
