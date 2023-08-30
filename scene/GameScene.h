@@ -82,6 +82,8 @@ public: // メンバ関数
 	/// 弾を発射し、タイマーをリセットするコールバック関数
 	/// </summary>
 	void FireAndResetCallback();
+	
+	
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;

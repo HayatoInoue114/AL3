@@ -74,6 +74,12 @@ public:
 
 	bool IsChangeStatePosition();
 
+	bool IsFire();
+
+	void OnDeath();
+
+	void PostDeath();
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -111,6 +117,14 @@ private:
 
 	Vector3 deltaVector_;
 
+	bool isFire_;
+
+	bool isAlive_;
+
+	int health_;
+
+	int reviveCount_;
+
 	//敵がパターンを変えるPosition(Z)
-	float changeStatePositionZ;
+	float changeStatePositionZ_;
 };

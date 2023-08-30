@@ -431,28 +431,32 @@ void GameScene::UpdateEnemyPopCommands() {
 void GameScene::EnemyFire() {
 	// 差分ベクトルを求める
 	for (Enemy* enemy : enemies_) {
-		assert(player_);
+		if (enemy->IsFire()) {
+			assert(player_);
 
-		// 弾の速度
-		const float kBulletSpeed = 1.0f;
-		Vector3 velocity_ = {1, 1, kBulletSpeed};
+			// 弾の速度
+			const float kBulletSpeed = 1.0f;
+			Vector3 velocity_ = { 1, 1, kBulletSpeed };
 
-		velocity_ = Subtract(player_->GetWorldPosition(), enemy->GetWorldPosition());
-		// ベクトルの正規化
-		velocity_ = Normalize(velocity_);
+			velocity_ = Subtract(player_->GetWorldPosition(), enemy->GetWorldPosition());
+			// ベクトルの正規化
+			velocity_ = Normalize(velocity_);
 
-		// ベクトルの長さを速さに合わせる
-		velocity_ = Multiply(kBulletSpeed, velocity_);
+			// ベクトルの長さを速さに合わせる
+			velocity_ = Multiply(kBulletSpeed, velocity_);
 
-		// 速度ベクトルを自機の向きに合わせて回転させる
-		velocity_ = TransformNormal(velocity_, worldTransform_.matWorld_);
-		// 弾を生成し、初期化
-		EnemyBullet* newBullet = new EnemyBullet();
-		newBullet->Initialize(model, enemy->GetWorldPosition(), velocity_);
-		// 弾を登録する
-		AddEnemyBullet(newBullet);
+			// 速度ベクトルを自機の向きに合わせて回転させる
+			velocity_ = TransformNormal(velocity_, worldTransform_.matWorld_);
+			// 弾を生成し、初期化
+			EnemyBullet* newBullet = new EnemyBullet();
+			newBullet->Initialize(model, enemy->GetWorldPosition(), velocity_);
+			// 弾を登録する
+			AddEnemyBullet(newBullet);
+		}
 	}
 }
+
+
 
 void GameScene::FireAndResetCallback() {
 	EnemyFire();
@@ -460,3 +464,4 @@ void GameScene::FireAndResetCallback() {
 	timedCalls_.push_back(
 	    new TimedCall(std::bind(&GameScene::FireAndResetCallback, this), kFireInterval));
 }
+

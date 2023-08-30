@@ -4,6 +4,29 @@
 #include <cmath>
 #include <math.h>
 
+
+int GetRandom(int min, int max) {
+	static int flag;
+
+	if (flag == 0) {
+		srand((int)time(NULL));
+		flag = 1;
+	}
+
+	return min + (int)(rand() * (max - min + 1.0) / (1.0 + RAND_MAX));
+}
+
+float GetRandom(float min, float max) {
+	static float flag;
+
+	if (flag == 0) {
+		srand((float)time(NULL));
+		flag = 1;
+	}
+
+	return min + (float)(rand() * (max - min + 1.0f) / (1.0f + RAND_MAX));
+}
+
 Vector3 Add(const Vector3& v1, const Vector3& v2) {
 	Vector3 num = {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
 	return num;

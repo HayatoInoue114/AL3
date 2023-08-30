@@ -9,4 +9,8 @@ class Enemy;
 class EnemyStateLeave : public IEnemyState {
 public:
 	void Update(Enemy* pEnemy) override;
+private:
+	Vector3 move = {};
+
+	Vector3 acceleration = {};
 };

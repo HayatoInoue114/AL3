@@ -8,6 +8,11 @@ Enemy::Enemy() {
 	/*player_ = new Player();*/
 	deltaVector_ = {};
 	velocity_ = {};
+	isFire_ = true;
+	changeStatePositionZ_ = {};
+	isAlive_ = false;
+	health_ = {};
+	reviveCount_ = {};
 }
 
 Enemy::~Enemy() {
@@ -29,7 +34,13 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 
 	state_ = new EnemyStateApproach();
 
-	changeStatePositionZ = 50.0f;
+	isAlive_ = true;
+
+	health_ = 15;
+
+	reviveCount_ = 0;
+
+	changeStatePositionZ_ = GetRandom(50.0f, 80.0f);
 }
 
 void Enemy::Approach() {}
@@ -39,6 +50,7 @@ void Enemy::Leave() {
 
 void Enemy::ChangeState(IEnemyState* newState) {
 	//delete state_;
+	isFire_ = false;
 	state_ = newState;
 }
 
@@ -68,13 +80,41 @@ Vector3 Enemy::GetWorldPosition() {
 	return worldPos;
 }
 
-void Enemy::OnCollision() {}
+void Enemy::OnCollision() {
+	health_--;
+}
 
 bool Enemy::IsChangeStatePosition() {
-	if (worldTransform_.translation_.z < changeStatePositionZ) {
+	if (worldTransform_.translation_.z < changeStatePositionZ_) {
 		return true;
 	}
 	else {
 		return false;
+	}
+}
+
+bool Enemy::IsFire() {
+	if (isFire_) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Enemy::OnDeath() {
+	if (health_ >= 0) {
+		isAlive_ = false;
+	}
+}
+
+void Enemy::PostDeath() {
+	if (!isAlive_) {
+		reviveCount_++;
+	}
+
+	if (reviveCount_ >= 60) {
+		isAlive_ = true;
+		reviveCount_ = 0;
 	}
 }

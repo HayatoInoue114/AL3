@@ -3,9 +3,23 @@
 
 void EnemyStateLeave::Update(Enemy* pEnemy) {
 	Vector3 position = pEnemy->GetWorldPosition();
+	if (position.x > 0) {
+		acceleration.x = 0.01f;
+	}
+	if (position.x < 0) {
+		acceleration.x = -0.01f;
+	}
+	if (position.y > 0) {
+		acceleration.y = 0.01f;
+	}
+	if (position.y < 0) {
+		acceleration.y = -0.01f;
+	}
+	
+	acceleration.z = -0.01f;
 
-	Vector3 move = { 0.1f, 0.1f, 0 };
+	move = Add(move, acceleration);
+
 	// 移動
-
 	pEnemy->ChangePosition(move);
 }
