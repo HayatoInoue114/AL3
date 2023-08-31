@@ -1,6 +1,7 @@
 #pragma once
 #include "EnemyBullet.h"
 #include "IEnemyState.h"
+#include "EnemyStateEntry.h"
 #include "EnemyStateApproach.h"
 #include "EnemyStateLeave.h"
 #include "GameScene.h"
@@ -60,25 +61,29 @@ public:
 
 	void SetPlayer(Player* player) { player_ = player; }
 
-	enum class Phase {
-		Approach, // 接近する
-		Leave,    // 離脱する
-	};
+	//enum class Phase {
+	//	Approach, // 接近する
+	//	Leave,    // 離脱する
+	//};
 
-	void Approach();
-	void Leave();
+	/*void Approach();
+	void Leave();*/
 	void ChangeState(IEnemyState* newState);
 
 	void ChangePosition(Vector3 vector);
 	Vector3 GetTranslation() { return worldTransform_.translation_; }
 
-	bool IsChangeStatePosition();
-
-	bool IsFire();
+	bool IsLeaveChangeStatePosition();
+	
+	bool IsApproachChangeStatePosition();
 
 	void OnDeath();
 
-	void PostDeath();
+	bool GetIsAlive() { return isAlive_; }
+
+	/*bool PostDeath();*/
+
+	bool isFire;
 
 private:
 	// ワールド変換データ
@@ -116,8 +121,6 @@ private:
 	Vector3 velocity_;
 
 	Vector3 deltaVector_;
-
-	bool isFire_;
 
 	bool isAlive_;
 

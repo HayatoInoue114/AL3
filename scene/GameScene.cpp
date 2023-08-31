@@ -25,148 +25,181 @@ GameScene::~GameScene() {
 }
 
 void GameScene::Initialize() {
+	XINPUT_STATE joyState;
+	switch (gameScene)
+	{
+	case 0:
 
-	dxCommon_ = DirectXCommon::GetInstance();
-	input_ = Input::GetInstance();
-	audio_ = Audio::GetInstance();
+		break;
+	case 1:
+		dxCommon_ = DirectXCommon::GetInstance();
+		input_ = Input::GetInstance();
+		audio_ = Audio::GetInstance();
 
-	//レティクルのテクスチャ
-	TextureManager::Load("reticle.png");
+		//レティクルのテクスチャ
+		TextureManager::Load("reticle.png");
 
-	// ファイル名を指定してテクスチャを読み込む
-	textureHandle = TextureManager::Load("godest.png");
-	// 3Dモデルの生成
-	model = Model::Create();
+		// ファイル名を指定してテクスチャを読み込む
+		soundDataHandle_ = audio_->LoadWave("Apocalypse_Doors.wav");
 
-	worldTransform_.Initialize();
+		modelPlayer_ = Model::CreateFromOBJ("player", true);
+		// 3Dモデルの生成
+		model = Model::Create();
 
-	// 3Dモデルの生成
-	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
+		worldTransform_.Initialize();
 
-	// ビュープロジェクションの初期化
-	viewProjection.farZ = 500;
-	viewProjection.Initialize();
+		// 3Dモデルの生成
+		modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
-	// レールカメラの生成
-	railCamera_ = new RailCamera();
-	// レールカメラの初期化
-	railCamera_->Initialize({0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f});
+		// ビュープロジェクションの初期化
+		viewProjection.farZ = 500;
+		viewProjection.Initialize();
 
-	// 自キャラの生成
-	player_ = new Player();
-	Vector3 playerPosition(0, 0, 50.0f);
-	// 自キャラの初期化
-	player_->Initialize(model, textureHandle, playerPosition);
+		// レールカメラの生成
+		railCamera_ = new RailCamera();
+		// レールカメラの初期化
+		railCamera_->Initialize({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
 
-	// デバッグカメラの生成
-	debugCamera_ = new DebugCamera(1280, 720);
+		// 自キャラの生成
+		player_ = new Player();
+		Vector3 playerPosition(0, 0, 50.0f);
+		// 自キャラの初期化
+		player_->Initialize(modelPlayer_, playerPosition);
 
-	// 軸方向の表示を有効にする
-	AxisIndicator::GetInstance()->SetVisible(true);
-	// 軸方向表示が参照するビュープロジェクションを指定する(アドレス渡し)
-	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection);
+		// デバッグカメラの生成
+		debugCamera_ = new DebugCamera(1280, 720);
 
-	// 敵の生成
-	/*EnemySpawn({0.5f, 0.0f, 60.0f});*/
+		// 軸方向の表示を有効にする
+		AxisIndicator::GetInstance()->SetVisible(true);
+		// 軸方向表示が参照するビュープロジェクションを指定する(アドレス渡し)
+		AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection);
 
-	LoadEnemyPopData();
+		// 敵の生成
+		/*EnemySpawn({0.5f, 0.0f, 60.0f});*/
 
-	// enemy_ = new Enemy();
-	//// 敵キャラに自キャラのアドレスを渡す
-	// enemy_->SetPlayer(player_);
-	//// 敵の初期化
-	// enemy_->Initialize(model, {0.5f, 0.0f, 80.0f}, this);
-	// enemy_->SetGameScene(this);
+		LoadEnemyPopData();
 
-	// 天球の生成
-	skydome_ = new Skydome();
-	// 天球の初期化
-	skydome_->Initialize(modelSkydome_);
+		// 天球の生成
+		skydome_ = new Skydome();
+		// 天球の初期化
+		skydome_->Initialize(modelSkydome_);
 
-	// 自キャラとレールカメラの親子関係を結ぶ
-	player_->SetParent(&railCamera_->GetWorldTransform());
+		// 自キャラとレールカメラの親子関係を結ぶ
+		player_->SetParent(&railCamera_->GetWorldTransform());
 
-	FireAndResetCallback();
+		FireAndResetCallback();
+
+		countDown = 0;
+
+		gameScene = 0;
+
+		audio_->PlayWave(soundDataHandle_);
+
+		audio_->SetVolume(soundDataHandle_, 0.1f);
+		break;
+	}
+	
 }
 
 void GameScene::Update() {
-	viewProjection.UpdateMatrix();
-	// レールカメラの更新
-	railCamera_->Update();
-	viewProjection.matView = railCamera_->GetViewProjection().matView;
-	viewProjection.matProjection = railCamera_->GetViewProjection().matProjection;
-	viewProjection.TransferMatrix();
+	//ゲームパッドの状態を得る変数（XINPUT）
+	
+	switch (gameScene)
+	{
+	case 0:
+		if (Input::GetInstance()->GetJoystickState(0, joyState)) {
+			gameScene = 1;
+		}
+		break;
+	case 1:
+		countDown++;
+		viewProjection.UpdateMatrix();
+		// レールカメラの更新
+		railCamera_->Update();
+		viewProjection.matView = railCamera_->GetViewProjection().matView;
+		viewProjection.matProjection = railCamera_->GetViewProjection().matProjection;
+		viewProjection.TransferMatrix();
+
+
+
+		// 敵の発生処理
+		UpdateEnemyPopCommands();
+
+		// 敵の更新
+		for (Enemy* enemy : enemies_) {
+			if (enemy->GetIsAlive()) {
+				enemy->Update();
+			}
+		}
+
+		// 自キャラの更新
+		player_->Update(viewProjection);
+
+
+
+		// 範囲for文でリストの全要素について回す
+		for (TimedCall* timedCall : timedCalls_) {
+			timedCall->Update();
+		}
+
+		// 終了したタイマーを削除
+		timedCalls_.remove_if([](TimedCall* timedCall) {
+			if (timedCall->IsFinished()) {
+				delete timedCall;
+				return true;
+			}
+			return false;
+			});
+
+		// デスフラグの立った弾を削除
+		enemyBullets_.remove_if([](EnemyBullet* bullet) {
+			if (bullet->IsDead()) {
+				delete bullet;
+				return true;
+			}
+			return false;
+			});
+
+		for (EnemyBullet* bullet : enemyBullets_) {
+			bullet->SetPlayer(player_);
+
+			bullet->Update();
+		}
+
+		// 当たり判定
+		CheckAllCollisions();
+
+		// 天球の更新
+		skydome_->Update();
+
+		// デバッグカメラの更新
+		//	debugCamera_->Update();
+		// #ifdef _DEBUG
+		//	if (input_->TriggerKey(DIK_LALT)) {
+		//		if (isDebugCameraActive_ == false) {
+		//			isDebugCameraActive_ = true;
+		//		} else {
+		//			isDebugCameraActive_ = false;
+		//		}
+		//
+		//	}
+		// #endif // DEBUG
+		//
+		//	//カメラの処理
+		//	if (isDebugCameraActive_) {
+		//		debugCamera_->Update();
+		//		viewProjection.matView = debugCamera_->GetViewProjection().matView;
+		//		viewProjection.matProjection = debugCamera_->GetViewProjection().matProjection;
+		//		//ビュープロジェクション行列の転送
+		//		viewProjection.TransferMatrix();
+		//	} else {
+		//		//ビュープロジェクション行列の更新と転送
+		//		viewProjection.UpdateMatrix();
+		//	}
+		break;
+	}
 
 	
-
-	// 敵の発生処理
-	UpdateEnemyPopCommands();
-
-	// 敵の更新
-	for (Enemy* enemy : enemies_) {
-		enemy->Update();
-	}
-
-	// 自キャラの更新
-	player_->Update(viewProjection);
-
-	// 終了したタイマーを削除
-	timedCalls_.remove_if([](TimedCall* timedCall) {
-		if (timedCall->IsFinished()) {
-			delete timedCall;
-			return true;
-		}
-		return false;
-	});
-
-	// 範囲for文でリストの全要素について回す
-	for (TimedCall* timedCall : timedCalls_) {
-		timedCall->Update();
-	}
-
-	// デスフラグの立った弾を削除
-	enemyBullets_.remove_if([](EnemyBullet* bullet) {
-		if (bullet->IsDead()) {
-			delete bullet;
-			return true;
-		}
-		return false;
-	});
-
-	for (EnemyBullet* bullet : enemyBullets_) {
-		bullet->Update();
-	}
-
-	// 当たり判定
-	CheckAllCollisions();
-
-	// 天球の更新
-	skydome_->Update();
-
-	// デバッグカメラの更新
-	//	debugCamera_->Update();
-	// #ifdef _DEBUG
-	//	if (input_->TriggerKey(DIK_LALT)) {
-	//		if (isDebugCameraActive_ == false) {
-	//			isDebugCameraActive_ = true;
-	//		} else {
-	//			isDebugCameraActive_ = false;
-	//		}
-	//
-	//	}
-	// #endif // DEBUG
-	//
-	//	//カメラの処理
-	//	if (isDebugCameraActive_) {
-	//		debugCamera_->Update();
-	//		viewProjection.matView = debugCamera_->GetViewProjection().matView;
-	//		viewProjection.matProjection = debugCamera_->GetViewProjection().matProjection;
-	//		//ビュープロジェクション行列の転送
-	//		viewProjection.TransferMatrix();
-	//	} else {
-	//		//ビュープロジェクション行列の更新と転送
-	//		viewProjection.UpdateMatrix();
-	//	}
 }
 
 void GameScene::Draw() {
@@ -174,6 +207,17 @@ void GameScene::Draw() {
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
+	switch (gameScene)
+	{
+	case 0:
+		if (Input::GetInstance()->GetJoystickState(0, joyState)) {
+			gameScene = 1;
+		}
+		break;
+	case 1:
+		break;
+	}
+	
 #pragma region 背景スプライト描画
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(commandList);
@@ -195,13 +239,15 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	//skydome_->Draw(viewProjection);
+	skydome_->Draw(viewProjection);
 
 	player_->Draw(viewProjection);
 
 	
 	for (Enemy* enemy : enemies_) {
-		enemy->Draw(viewProjection);
+		if (enemy->GetIsAlive()) {
+			enemy->Draw(viewProjection);
+		}
 	}
 
 	// 弾描画
@@ -227,61 +273,6 @@ void GameScene::Draw() {
 
 #pragma endregion
 }
-
-// void GameScene::CheckAllCollisions() {
-//
-//	// 自弾リストの取得
-//	const std::list<PlayerBullet*>& playerBullets = player_->GetBullets();
-//	// 敵弾リストの取得
-//	const std::list<EnemyBullet*>& enemyBullets = enemyBullets_;
-//	// 敵リストの取得
-//	const std::list<Enemy*>& enemy = enemies_;
-//
-// #pragma region
-//
-//	for (EnemyBullet* enemyBullet : enemyBullets) {
-//		for (PlayerBullet* playerBullet : playerBullets) {
-//			for (Enemy* enemy : enemies_) {
-//				Vector3 playerPosition = player_->GetWorldPosition();
-//				// 敵弾と自機
-//				Vector3 enemyBulletPosition = enemyBullet->GetWorldPosition();
-//
-//				Vector3 distanceToEnemyBullet = Subtract(playerPosition, enemyBulletPosition);
-//				float dotEnemyBullet = (distanceToEnemyBullet.x * distanceToEnemyBullet.x) +
-//				                       (distanceToEnemyBullet.y * distanceToEnemyBullet.y) +
-//				                       (distanceToEnemyBullet.z * distanceToEnemyBullet.z);
-//
-//				if (dotEnemyBullet <= 5) {
-//					player_->OnCollision();
-//					enemyBullet->OnCollision();
-//				}
-//
-//				// 自弾と敵
-//				Vector3 playerBulletPosition = playerBullet->GetWorldPosition();
-//
-//				Vector3 enemyPosition = enemy->GetWorldPosition();
-//
-//				Vector3 distanceToPlayerBullet = Subtract(enemyPosition, playerBulletPosition);
-//				float dotPlayerBullet = (distanceToPlayerBullet.x * distanceToPlayerBullet.x) +
-//				                        (distanceToPlayerBullet.y * distanceToPlayerBullet.y) +
-//				                        (distanceToPlayerBullet.z * distanceToPlayerBullet.z);
-//
-//				if (dotPlayerBullet <= 5) {
-//					enemy->OnCollision();
-//					playerBullet->OnCollision();
-//				}
-//			}
-//		}
-//	}
-//
-// #pragma endregion
-//
-// #pragma region
-// #pragma endregion
-//
-// #pragma region
-// #pragma endregion
-// }
 
 void GameScene::CheckAllCollisions() {
 	Vector3 posA, posB;
@@ -431,7 +422,7 @@ void GameScene::UpdateEnemyPopCommands() {
 void GameScene::EnemyFire() {
 	// 差分ベクトルを求める
 	for (Enemy* enemy : enemies_) {
-		if (enemy->IsFire()) {
+		if (enemy->isFire && enemy->GetIsAlive()) {
 			assert(player_);
 
 			// 弾の速度

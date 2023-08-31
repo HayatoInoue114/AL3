@@ -1,14 +1,14 @@
 #include "Enemy.h"
 #include "Player.h"
 
-void (Enemy::* Enemy::situation[])() = { &Enemy::Approach, &Enemy::Leave };
+//void (Enemy::* Enemy::situation[])() = { &Enemy::Approach, &Enemy::Leave };
 
 Enemy::Enemy() {
-	state_ = new EnemyStateApproach();
+	state_ = new EnemyStateEntry();
 	/*player_ = new Player();*/
 	deltaVector_ = {};
 	velocity_ = {};
-	isFire_ = true;
+	isFire = false;
 	changeStatePositionZ_ = {};
 	isAlive_ = false;
 	health_ = {};
@@ -32,33 +32,35 @@ void Enemy::Initialize(Model* model, Vector3 position) {
 	// 引数で受け取った初期座標をセット
 	worldTransform_.translation_ = { position };
 
-	state_ = new EnemyStateApproach();
+	state_ = new EnemyStateEntry();
 
 	isAlive_ = true;
 
-	health_ = 15;
+	health_ = 3;
 
 	reviveCount_ = 0;
 
-	changeStatePositionZ_ = GetRandom(50.0f, 80.0f);
+	changeStatePositionZ_ = 80.0f;
 }
 
-void Enemy::Approach() {}
-
-void Enemy::Leave() {
-}
+//void Enemy::Approach() {}
+//
+//void Enemy::Leave() {
+//}
 
 void Enemy::ChangeState(IEnemyState* newState) {
 	//delete state_;
-	isFire_ = false;
 	state_ = newState;
 }
 
 void Enemy::Update() {
 	state_->Update(this);
 
+	OnDeath();
+
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransferMatrix();
+	worldTransform_.scale_ = { 1.0f,1.0f,1.0f };
 }
 
 void Enemy::Draw(const ViewProjection& viewProjection) {
@@ -82,9 +84,11 @@ Vector3 Enemy::GetWorldPosition() {
 
 void Enemy::OnCollision() {
 	health_--;
+
+	worldTransform_.scale_ = { 1.5f,1.5f,1.5f };
 }
 
-bool Enemy::IsChangeStatePosition() {
+bool Enemy::IsLeaveChangeStatePosition() {
 	if (worldTransform_.translation_.z < changeStatePositionZ_) {
 		return true;
 	}
@@ -93,9 +97,18 @@ bool Enemy::IsChangeStatePosition() {
 	}
 }
 
-bool Enemy::IsFire() {
-	if (isFire_) {
-		return true;
+bool Enemy::IsApproachChangeStatePosition() {
+	bool isXComp{}, isYComp{};
+	
+	if (worldTransform_.translation_.x < 10.0f && worldTransform_.translation_.x > -10.0f) {
+		isXComp = true;
+	}
+	if (worldTransform_.translation_.y < 10.0f && worldTransform_.translation_.y > -10.0f) {
+		isYComp = true;
+	}
+
+	if (isXComp && isYComp) {
+		return  true;
 	}
 	else {
 		return false;
@@ -103,18 +116,18 @@ bool Enemy::IsFire() {
 }
 
 void Enemy::OnDeath() {
-	if (health_ >= 0) {
+	if (health_ <= 0) {
 		isAlive_ = false;
 	}
 }
 
-void Enemy::PostDeath() {
-	if (!isAlive_) {
-		reviveCount_++;
-	}
-
-	if (reviveCount_ >= 60) {
-		isAlive_ = true;
-		reviveCount_ = 0;
-	}
-}
+//bool Enemy::PostDeath() {
+//	if (!isAlive_) {
+//		reviveCount_++;
+//	}
+//
+//	if (reviveCount_ >= 60) {
+//		isAlive_ = true;
+//		reviveCount_ = 0;
+//	}
+//}

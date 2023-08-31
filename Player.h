@@ -1,4 +1,5 @@
 #pragma once
+#include "Audio.h"
 #include "Input.h"
 #include "MT.h"
 #include "Model.h"
@@ -20,7 +21,7 @@ public:
 	/// </summary>
 	/// <param name="model">モデル</param>
 	/// <param name="textureHandle">テクスチャハンドル</param>
-	void Initialize(Model* model, uint32_t textureHandle, Vector3 playerPosition);
+	void Initialize(Model* model, Vector3 playerPosition);
 
 	/// <summary>
 	/// 更新
@@ -77,11 +78,16 @@ public:
 /// </summary>
 	Vector2 GetCursorPosition();
 
+
+	bool GetIsAlive() { return isAlive_; }
 private:
+	Audio* audio_ = nullptr;
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	// モデル
 	Model* model_ = nullptr;
+
+	Model* modelPlayer_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 	// キーボード入力
@@ -99,4 +105,8 @@ private:
 
 	// 2Dレティクル用のスプライト
 	Sprite* sprite2DReticle_ = nullptr;
+
+	bool isAlive_;
+
+	int health_;
 };

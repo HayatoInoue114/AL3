@@ -96,7 +96,7 @@ private: // メンバ変数
 	/// ゲームシーン用
 	/// </summary>
 	/// //テクスチャハンドル
-	uint32_t textureHandle = 0;
+	
 
 	// 3Dモデルデータ
 	Model* model = nullptr;
@@ -135,7 +135,20 @@ private: // メンバ変数
 	int waitTimer_ = 0;
 
 	// 弾を発射する間隔
-	static const uint32_t kFireInterval = 30;
+	static const uint32_t kFireInterval = 60;
 	// 次元発動のリスト
 	std::list<TimedCall*> timedCalls_;
+
+	Model* modelPlayer_ = nullptr;
+
+	int countDown;
+
+	int gameScene;
+
+	uint32_t soundDataHandle_ = 0;
+
+	uint32_t enemyFire_ = 0;
+	uint32_t ex_ = 0;
+
+	XINPUT_STATE joyState;
 };

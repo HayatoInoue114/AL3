@@ -16,10 +16,11 @@ void EnemyStateLeave::Update(Enemy* pEnemy) {
 		acceleration.y = -0.01f;
 	}
 	
-	acceleration.z = -0.01f;
+	acceleration.z = 0.01f;
 
 	move = Add(move, acceleration);
 
+	pEnemy->isFire = false;
 	// 移動
 	pEnemy->ChangePosition(move);
 }

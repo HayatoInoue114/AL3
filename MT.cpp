@@ -5,6 +5,18 @@
 #include <math.h>
 
 
+float Clamp(float number, float min, float max) {
+	if (min > number) {
+		return min;
+	}
+	else if (max < number) {
+		return max;
+	}
+	else {
+		return number;
+	}
+}
+
 int GetRandom(int min, int max) {
 	static int flag;
 
@@ -16,16 +28,16 @@ int GetRandom(int min, int max) {
 	return min + (int)(rand() * (max - min + 1.0) / (1.0 + RAND_MAX));
 }
 
-float GetRandom(float min, float max) {
-	static float flag;
-
-	if (flag == 0) {
-		srand((float)time(NULL));
-		flag = 1;
-	}
-
-	return min + (float)(rand() * (max - min + 1.0f) / (1.0f + RAND_MAX));
-}
+//float GetRandom(float min, float max) {
+//	static float flag;
+//
+//	if (flag == 0) {
+//		srand((float)time(NULL));
+//		flag = 1;
+//	}
+//
+//	return min + (float)(rand() * (max - min + 1.0f) / (1.0f + RAND_MAX));
+//}
 
 Vector3 Add(const Vector3& v1, const Vector3& v2) {
 	Vector3 num = {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
@@ -431,4 +443,26 @@ Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
 	result.y /= w;
 	result.z /= w;
 	return result;
+}
+
+Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t) {
+	float dot = Dot(v1, v2);
+
+	t = Clamp(t, 0.0f, 1.0f);
+
+	float theta = std::acosf(dot) * t;
+
+	Vector3 intermediate = {
+		v2.x - v1.x * dot,
+		v2.y - v1.y * dot,
+		v2.z - v1.z * dot
+	};
+
+	float s = std::sinf(theta);
+
+	return{
+		v1.x * std::cosf(theta) + intermediate.x * s,
+		v1.y * std::cosf(theta) + intermediate.y * s,
+		v1.z * std::cosf(theta) + intermediate.z * s,
+	};
 }
