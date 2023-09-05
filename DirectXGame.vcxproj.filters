@@ -139,6 +139,12 @@
     <Filter Include="ヘッダー ファイル\MyClass\TimedCall">
       <UniqueIdentifier>{8c79c0ba-868a-4a36-a4b5-eb745e14959a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MyClass\Collider">
+      <UniqueIdentifier>{9a2a23f1-c4c6-4908-bc45-b7c2fca8c8d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MyClass\Collider">
+      <UniqueIdentifier>{94fa79be-11db-4928-bbd4-8cfcb343be5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -188,6 +194,12 @@
     </ClCompile>
     <ClCompile Include="EnemyStateLeave.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyStateEntry.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>ソース ファイル\MyClass\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="IEnemyState.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyStateEntry.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ヘッダー ファイル\MyClass\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
