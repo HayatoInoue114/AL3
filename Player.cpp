@@ -2,6 +2,7 @@
 #include <cassert>
 #include "MT.h"
 #include "ImGuiManager.h"
+#include <algorithm>
 
 //NULLポインタチェック
 Player::Player() {}

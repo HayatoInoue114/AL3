@@ -10,6 +10,8 @@
 #include "WorldTransform.h"
 #include "Player.h"
 #include "DebugCamera.h"
+#include <memory>
+#include <wrl.h>
 
 /// <summary>
 /// ゲームシーン
@@ -56,17 +58,19 @@ private: // メンバ変数
 	uint32_t textureHandle = 0;
 
 	// 3Dモデルデータ
-	Model* model = nullptr;
+	std::unique_ptr<Model> model_;
 
 	// ビュープロジェクション
 	ViewProjection viewProjection;
 
 	// 自キャラ
-	Player* player_ = nullptr;
+	std::unique_ptr<Player> player_{};
+	//Microsoft::WRL::ComPtr<Player> player_{};
 
 	//デバッグカメラ有効
 	bool isDebugCameraActive_ = false;
 
 	//デバッグカメラ
-	DebugCamera* debugCamera_ = nullptr;
+	std::unique_ptr<DebugCamera> debugCamera_{};
+	//DebugCamera* debugCamera_{};
 };

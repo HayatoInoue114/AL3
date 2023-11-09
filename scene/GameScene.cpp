@@ -6,9 +6,6 @@
 GameScene::GameScene() {}
 
 GameScene::~GameScene() { 
-	delete model;
-	delete player_;
-	delete debugCamera_;
 }
 
 void GameScene::Initialize() {
@@ -20,15 +17,15 @@ void GameScene::Initialize() {
 	//ファイル名を指定してテクスチャを読み込む
 	textureHandle = TextureManager::Load("godest.png");
 	// 3Dモデルの生成
-	model = Model::Create();
+	model_.reset(Model::Create());
 
 	//ビュープロジェクションの初期化
 	viewProjection.Initialize();
 
 	//自キャラの生成
-	player_ = new Player();
+	player_ = std::make_unique<Player>();
 	//自キャラの初期化
-	player_->Initialize(model,textureHandle);
+	player_->Initialize(model_.get(),textureHandle);
 
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(1280, 720);
