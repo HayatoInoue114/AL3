@@ -3,12 +3,13 @@
 #include "WorldTransform.h"
 #include "Input.h"
 #include "MT.h"
+#include "ICharacter.h"
 
 
 /// <summary>
 /// 自キャラ
 /// </summary>
-class Player {
+class Player : ICharacter{
 public:
 	Player();
 	~Player();
@@ -18,7 +19,7 @@ public:
 /// </summary>
 /// <param name="model">モデル</param>
 /// <param name="textureHandle">テクスチャハンドル</param>
-	void Initialize(Model* model,uint32_t textureHandle);
+	void Initialize(const std::vector<Model*>& models) override;
 
 /// <summary>
 /// 更新

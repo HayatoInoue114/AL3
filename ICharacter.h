@@ -20,6 +20,12 @@ public:
 	/// </summary>
 	virtual void Draw(const ViewProjection& viewProjection);
 
+	/// <summary>
+	/// ワールド変換データ
+	/// </summary>
+	/// <returns>ワールド変換データ</returns>
+	const WorldTransform& GetworldTransform() { return worldTransform_; }
+
 protected:
 	std::vector<Model*> models_;
 
