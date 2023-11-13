@@ -9,13 +9,11 @@ Player::Player() {}
 
 Player::~Player() {}
 
-void Player::Initialize(const std::vector<Model*>& models) { 
-	ICharacter::Initialize(models);
-
+void Player::Initialize(Model* model, uint32_t textureHandle) {
 	assert(models); 
 
 	//引数として受け取ったデータをメンバ変数に記録する
-	model_ = models;
+	model_ = model;
 	textureHandle_ = textureHandle;
 
 	// シングルトンインスタンスを取得する

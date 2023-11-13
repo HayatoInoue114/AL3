@@ -9,7 +9,7 @@
 /// <summary>
 /// 自キャラ
 /// </summary>
-class Player : ICharacter{
+class Player{
 public:
 	Player();
 	~Player();
@@ -19,7 +19,7 @@ public:
 /// </summary>
 /// <param name="model">モデル</param>
 /// <param name="textureHandle">テクスチャハンドル</param>
-	void Initialize(const std::vector<Model*>& models) override;
+	void Initialize(Model* model, uint32_t textureandle);
 
 /// <summary>
 /// 更新
@@ -38,7 +38,7 @@ private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;
 	//モデル
-	std::vector<Model*> model_;
+	Model* model_{};
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 	//キーボード入力
