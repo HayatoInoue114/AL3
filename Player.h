@@ -38,7 +38,7 @@ private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;
 	//モデル
-	Model* model_ = nullptr;
+	std::vector<Model*> model_;
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 	//キーボード入力
