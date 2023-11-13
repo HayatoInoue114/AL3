@@ -7,8 +7,8 @@ void ICharacter::Initialize(const std::vector<Model*>& models) {
 
 void ICharacter::Update() { worldTransform_.UpdateMatrix(); }
 
-void ICharacter::Draw(const ViewProjection& viewProjection) {
+void ICharacter::Draw(const ViewProjection& viewProjection, uint32_t textureHandle) {
 	for (Model* model : models_) {
-		model->Draw(worldTransform_, viewProjection);
+		model->Draw(worldTransform_, viewProjection, textureHandle);
 	}
 }

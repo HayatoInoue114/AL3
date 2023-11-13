@@ -10,7 +10,6 @@ Player::Player() {}
 Player::~Player() {}
 
 void Player::Initialize(Model* model, uint32_t textureHandle) {
-	assert(models); 
 
 	//引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;

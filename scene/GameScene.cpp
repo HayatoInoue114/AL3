@@ -29,6 +29,9 @@ void GameScene::Initialize() {
 	//自キャラの初期化
 	player_->Initialize(model_.get(),textureHandle);
 
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->Initialize(model_.get(), groundTexture_);
+
 	//地面
 	ground_ = std::make_unique<Ground>();
 	ground_->Initialize(modelGround_.get());
@@ -50,6 +53,8 @@ void GameScene::Initialize() {
 void GameScene::Update() {
 	//自キャラの更新
 	player_->Update();
+
+	enemy_->Update();
 
 	followCamera_->Update();
 	viewProjection.matView = followCamera_->GetViewProjection().matView;
@@ -109,6 +114,8 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	player_->Draw(viewProjection);
+
+	enemy_->Draw(viewProjection);
 
 	ground_->Draw(viewProjection, groundTexture_);
 	// 3Dオブジェクト描画後処理

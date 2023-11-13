@@ -14,6 +14,7 @@
 #include <wrl.h>
 #include "Ground.h"
 #include "FollowCamera.h"
+#include "Enemy.h"
 
 /// <summary>
 /// ゲームシーン
@@ -83,4 +84,5 @@ private: // メンバ変数
 	//追従カメラ
 	std::unique_ptr<FollowCamera> followCamera_{};
 	
+	std::unique_ptr<Enemy> enemy_{};
 };

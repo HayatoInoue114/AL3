@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	virtual void Draw(const ViewProjection& viewProjection);
+	virtual void Draw(const ViewProjection& viewProjection, uint32_t textureHandle);
 
 	/// <summary>
 	/// ワールド変換データ
