@@ -30,8 +30,8 @@ public:
 /// </summary>
 	void Draw(ViewProjection viewProjection);
 
-	WorldTransform GetWorldTransform() { return worldTransform_; }
-	void SetWorldTransform_(WorldTransform worldTransform) { worldTransform_ = worldTransform; };
+	WorldTransform& GetWorldTransform() { return worldTransform_; }
+	void SetWorldTransform(WorldTransform& worldTransform) { worldTransform_ = worldTransform; };
 
 private:
 	//ワールド変換データ

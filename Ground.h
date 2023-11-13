@@ -13,6 +13,8 @@ public:
 
 	void Draw(ViewProjection& viewProjection, uint32_t textureHandle);
 
+	void SetWorldTransform(WorldTransform worldTransform) { worldTransform_ = worldTransform; };
+
 private:
 	Model* model_;
 

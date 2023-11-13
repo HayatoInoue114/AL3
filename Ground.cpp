@@ -2,12 +2,14 @@
 
 void Ground::Initialize(Model* model) { 
 	model_ = model;
+
 	worldTransform_.Initialize();
-	worldTransform_.scale_ = {10, 10, 1};
+	
 }
 
 void Ground::Update() {
-
+	worldTransform_.scale_ = {100, 100, 1};
+	worldTransform_.translation_ = {0, 0, -10.0f};
 }
 
 void Ground::Draw(ViewProjection& viewProjection, uint32_t textureHandle) { 
