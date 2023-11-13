@@ -12,6 +12,8 @@
 #include "DebugCamera.h"
 #include <memory>
 #include <wrl.h>
+#include "Ground.h"
+#include "FollowCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -44,6 +46,7 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -65,12 +68,19 @@ private: // メンバ変数
 
 	// 自キャラ
 	std::unique_ptr<Player> player_{};
-	//Microsoft::WRL::ComPtr<Player> player_{};
 
 	//デバッグカメラ有効
 	bool isDebugCameraActive_ = false;
 
 	//デバッグカメラ
 	std::unique_ptr<DebugCamera> debugCamera_{};
-	//DebugCamera* debugCamera_{};
+
+	//地面
+	std::unique_ptr<Ground> ground_{};
+	std::unique_ptr<Model> modelGround_{};
+	uint32_t groundTexture_{};
+
+	//追従カメラ
+	std::unique_ptr<FollowCamera> followCamera_{};
+	
 };

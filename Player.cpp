@@ -38,11 +38,11 @@ void Player::Update() {
 		move.x += kCharacterSpeed;
 	}
 
-	// 押した方向で移動ベクトルを変更(上下)
+	// 押した方向で移動ベクトルを変更(前後)
 	if (input_->PushKey(DIK_UP)) {
-		move.y += kCharacterSpeed;
+		move.z += kCharacterSpeed;
 	} else if (input_->PushKey(DIK_DOWN)) {
-		move.y -= kCharacterSpeed;
+		move.z -= kCharacterSpeed;
 	}
 
 	

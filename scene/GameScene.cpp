@@ -18,6 +18,8 @@ void GameScene::Initialize() {
 	textureHandle = TextureManager::Load("godest.png");
 	// 3Dモデルの生成
 	model_.reset(Model::Create());
+	modelGround_.reset(Model::Create());
+	modelGround_->CreateFromOBJ("cube", 1);
 
 	//ビュープロジェクションの初期化
 	viewProjection.Initialize();
@@ -27,8 +29,17 @@ void GameScene::Initialize() {
 	//自キャラの初期化
 	player_->Initialize(model_.get(),textureHandle);
 
+	//地面
+	ground_ = std::make_unique<Ground>();
+	ground_->Initialize(modelGround_.get());
+
+	//追従カメラ
+	followCamera_ = std::make_unique<FollowCamera>();
+	followCamera_->Initialize();
+	followCamera_->SetTarget(&player_->GetWorldTransform());
+
 	//デバッグカメラの生成
-	debugCamera_ = new DebugCamera(1280, 720);
+	debugCamera_ = std::make_unique<DebugCamera>(1280, 720);
 
 	//軸方向の表示を有効にする
 	AxisIndicator::GetInstance()->SetVisible(true);
@@ -94,7 +105,7 @@ void GameScene::Draw() {
 	/// </summary>
 	player_->Draw(viewProjection);
 
-
+	ground_->Draw(viewProjection,textureHandle);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion
