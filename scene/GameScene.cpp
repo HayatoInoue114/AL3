@@ -31,6 +31,7 @@ void GameScene::Initialize() {
 
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize(model_.get(), groundTexture_);
+	enemy_->SetPlayer(player_.get());
 
 	//地面
 	ground_ = std::make_unique<Ground>();

@@ -13,6 +13,8 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	t_ = 0.02f;
 
 	speed_ = 0.8f;
+
+	velocity_ = {0, 0, 0};
 }
 
 void Enemy::Update() {
@@ -21,7 +23,6 @@ void Enemy::Update() {
 
 	// ベクトルを正規化する
 	toPlayer = Normalize(toPlayer);
-	
 
 	velocity_ = Multiply(speed_, Slerp(velocity_, toPlayer, t_));
 

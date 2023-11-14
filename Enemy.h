@@ -22,6 +22,8 @@ public:
 	/// <summary>
 	void Draw(const ViewProjection& viewProjection);
 
+	void SetPlayer(Player* player) { player_ = player; }
+
 private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;
