@@ -1,5 +1,8 @@
 #pragma once
 #include "ICharacter.h"
+#include "MT.h"
+
+class Player;
 
 class Enemy
 {
@@ -28,5 +31,7 @@ private:
 	Model* model_;
 
 	ViewProjection viewProjection_;
+
+	Player* player_;
 };
 
