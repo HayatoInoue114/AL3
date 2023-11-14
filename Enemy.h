@@ -32,6 +32,14 @@ private:
 
 	ViewProjection viewProjection_;
 
-	Player* player_;
+	Player* player_{};
+
+	Vector3 velocity_{};
+
+	float speed_{};
+
+	float velocityXZ_{};
+
+	float t_{};
 };
 

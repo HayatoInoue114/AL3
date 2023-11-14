@@ -9,15 +9,19 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	worldTransform_.Initialize();
 
 	viewProjection_.Initialize();
+
+	t_ = 0;
+
+	speed_ = 0.8f;
 }
 
 void Enemy::Update() {
 	// 座標を移動させる（1フレーム分の移動量を足しこむ)
-	Vector3 toPlayer = Subtract(player_->GetWorldTransform(), worldTransform_.translation_);
+	Vector3 toPlayer = Subtract(player_->GetWorldTransform().translation_, worldTransform_.translation_);
 
 	// ベクトルを正規化する
 	toPlayer = Normalize(toPlayer);
-	velocity_ = Normalize(velocity_);
+	
 
 	velocity_ = Multiply(speed_, Slerp(velocity_, toPlayer, t_));
 
