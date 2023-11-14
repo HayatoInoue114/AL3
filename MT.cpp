@@ -459,3 +459,16 @@ Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t) {
 	    v1.z * std::cosf(theta) + intermediate.z * s,
 	};
 }
+
+float AngleBetweenVectors(const Vector3& v1, const Vector3& v2) {
+	// 正規化されたベクトルを使用して内積を計算
+	Vector3 normalizedV1 = Normalize(v1);
+	Vector3 normalizedV2 = Normalize(v2);
+
+	float dotProduct = normalizedV1.x * normalizedV2.x + normalizedV1.y * normalizedV2.y +
+	                   normalizedV1.z * normalizedV2.z;
+
+	// acos を使用してラジアンから度に変換
+	return (float)std::acos(dotProduct) * (180.0f / M_PI);
+}
+

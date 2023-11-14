@@ -27,6 +27,12 @@ public:
 	WorldTransform& GetWorldTransform() { return worldTransform_; }
 	void SetPlayer(Player* player) { player_ = player; }
 
+	bool CheckCollisionWithPlayer();
+
+	bool IsPlayerInFOV(const Vector3& toPlayer);
+
+	Vector3 ForwardVector() { return {velocity_}; }
+
 private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;
@@ -41,16 +47,28 @@ private:
 
 	//Vector3 velocity_{};
 
-	float t_;
+	//追いかける強度(1が最大)
+	float trackingPower_;
 
-	float speed_;
+	//追いかけるスピード
+	float chaseSpeed_;
 
 	float velocityXZ_;
-
-	const float kBulletSpeed = 1.0f;
 
 	Vector3 velocity_;
 
 	bool isChase_;
+
+	enum Situation {
+		MOVE,
+		STOP,
+		CHASE
+	};
+
+	int situation_;
+
+	float fovRadius_;
+
+	float fovAngle_;
 };
 

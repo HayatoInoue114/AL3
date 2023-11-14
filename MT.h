@@ -4,6 +4,8 @@
 #include <Vector3.h>
 #include <time.h>
 
+#define M_PI 3.14
+
 int GetRandom(int min, int max);
 
 // float GetRandom(float min, float max);
@@ -76,3 +78,7 @@ Vector3 Multyply(const Vector3& v, const Matrix4x4& m);
 Vector3 Transform(const Vector3& num, const Matrix4x4& m);
 
 Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t);
+
+// ベクトル間の角度を計算する関数
+float AngleBetweenVectors(const Vector3& v1, const Vector3& v2);
+

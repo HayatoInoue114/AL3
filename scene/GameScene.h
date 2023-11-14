@@ -85,4 +85,6 @@ private: // メンバ変数
 	std::unique_ptr<FollowCamera> followCamera_{};
 	
 	std::unique_ptr<Enemy> enemy_{};
+	uint32_t enemyTexture_{};
+	std::unique_ptr<Model> modelEnemy_{};
 };

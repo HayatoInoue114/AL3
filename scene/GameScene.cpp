@@ -19,7 +19,10 @@ void GameScene::Initialize() {
 	// 3Dモデルの生成
 	model_.reset(Model::Create());
 	modelGround_.reset(Model::CreateFromOBJ("ground", 1));
-	groundTexture_ = TextureManager::Load("uvChecker.png");
+	groundTexture_ = TextureManager::Load("ground.png");
+
+	modelEnemy_.reset(Model::CreateFromOBJ("enemy", 1));
+	enemyTexture_ = TextureManager::Load("enemy.png");
 
 	//ビュープロジェクションの初期化
 	viewProjection.Initialize();
@@ -31,7 +34,7 @@ void GameScene::Initialize() {
 
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->SetPlayer(player_.get());
-	enemy_->Initialize(model_.get(), groundTexture_);
+	enemy_->Initialize(model_.get(), enemyTexture_);
 
 	//地面
 	ground_ = std::make_unique<Ground>();
