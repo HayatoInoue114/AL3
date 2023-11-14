@@ -30,8 +30,8 @@ void GameScene::Initialize() {
 	player_->Initialize(model_.get(),textureHandle);
 
 	enemy_ = std::make_unique<Enemy>();
-	enemy_->Initialize(model_.get(), groundTexture_);
 	enemy_->SetPlayer(player_.get());
+	enemy_->Initialize(model_.get(), groundTexture_);
 
 	//地面
 	ground_ = std::make_unique<Ground>();
@@ -118,7 +118,7 @@ void GameScene::Draw() {
 
 	enemy_->Draw(viewProjection);
 
-	//ground_->Draw(viewProjection, groundTexture_);
+	ground_->Draw(viewProjection, groundTexture_);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion

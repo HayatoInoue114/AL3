@@ -9,31 +9,22 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 
 	worldTransform_.Initialize();
 
-	worldTransform_.translation_ = {0, 0, -50};
+	worldTransform_.translation_ = {30, 0, 50};
 
 	viewProjection_.Initialize();
 
-	t_ = 0.02f;
+	t_ = 0.2f;
 
-	speed_ = 0.8f;
+	speed_ = 0.1f;
 
 	velocityXZ_ = 0.0f;
 
 	velocity_ = {1.0f, 1.0f, kBulletSpeed};
+	
+	isChase_ = false;
 }
 
 void Enemy::Update() {
-	velocity_ =
-	    Subtract(player_->GetWorldTransform().translation_, GetWorldTransform().translation_);
-	// ベクトルの正規化
-	velocity_ = Normalize(velocity_);
-
-	// ベクトルの長さを速さに合わせる
-	velocity_ = Multiply(kBulletSpeed, velocity_);
-
-	// 速度ベクトルを自機の向きに合わせて回転させる
-	velocity_ = TransformNormal(velocity_, worldTransform_.matWorld_);
-
 	// 座標を移動させる（1フレーム分の移動量を足しこむ)
 	Vector3 toPlayer = Subtract(player_->GetWorldTransform().translation_, worldTransform_.translation_);
 

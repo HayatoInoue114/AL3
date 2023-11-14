@@ -48,6 +48,9 @@ private:
 	float velocityXZ_;
 
 	const float kBulletSpeed = 1.0f;
+
 	Vector3 velocity_;
+
+	bool isChase_;
 };
 

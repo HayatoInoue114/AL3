@@ -53,15 +53,15 @@ void Player::Update() {
 	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 
 	// 移動限界座標
-	const float kMoveLimitX = 17;
-	const float kMoveLimitY = 17;
+	/*const float kMoveLimitX = 17;
+	const float kMoveLimitY = 17;*/
 
 	// 範囲を超えない処理
-	worldTransform_.translation_.x =
+	/*worldTransform_.translation_.x =
 	    std::clamp(worldTransform_.translation_.x, -kMoveLimitX, kMoveLimitX);
 
 	worldTransform_.translation_.y =
-	    std::clamp(worldTransform_.translation_.y, -kMoveLimitY, kMoveLimitY);
+	    std::clamp(worldTransform_.translation_.y, -kMoveLimitY, kMoveLimitY);*/
 
 	//行列を定数バッファに転送
 	worldTransform_.TransferMatrix();
