@@ -118,7 +118,7 @@ void GameScene::Draw() {
 
 	enemy_->Draw(viewProjection);
 
-	ground_->Draw(viewProjection, groundTexture_);
+	//ground_->Draw(viewProjection, groundTexture_);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion

@@ -1,6 +1,8 @@
 #pragma once
-#include "ICharacter.h"
 #include "MT.h"
+#include "Model.h"
+#include "WorldTransform.h"
+#include "ViewProjection.h"
 
 class Player;
 
@@ -22,6 +24,7 @@ public:
 	/// <summary>
 	void Draw(const ViewProjection& viewProjection);
 
+	WorldTransform& GetWorldTransform() { return worldTransform_; }
 	void SetPlayer(Player* player) { player_ = player; }
 
 private:
@@ -34,14 +37,17 @@ private:
 
 	ViewProjection viewProjection_;
 
-	Player* player_{};
+	Player* player_;
 
-	Vector3 velocity_{};
+	//Vector3 velocity_{};
 
-	float speed_{};
+	float t_;
 
-	float velocityXZ_{};
+	float speed_;
 
-	float t_{};
+	float velocityXZ_;
+
+	const float kBulletSpeed = 1.0f;
+	Vector3 velocity_;
 };
 
