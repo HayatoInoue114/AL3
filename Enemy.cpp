@@ -14,7 +14,7 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 
 	speed_ = 0.8f;
 
-	velocity_ = {0, 0, 0};
+	velocity_ = {1, 1, 1};
 }
 
 void Enemy::Update() {
