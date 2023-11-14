@@ -10,7 +10,7 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 
 	viewProjection_.Initialize();
 
-	t_ = 0;
+	t_ = 0.02f;
 
 	speed_ = 0.8f;
 }
